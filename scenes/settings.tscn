@@ -80,6 +80,7 @@ offset_bottom = 472.0
 text = "Available:"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="chudLabel" type="Label" parent="." unique_id=1589422414]
 layout_mode = 0
@@ -107,3 +108,5 @@ offset_right = 128.0
 offset_bottom = 128.0
 theme_override_font_sizes/font_size = 40
 text = "<"
+
+[connection signal="pressed" from="scanSerialButton" to="." method="_on_scan_serial_button_pressed"]
