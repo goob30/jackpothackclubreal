@@ -10,6 +10,11 @@ const PATH_CHARM_CO: String = "res://scenes/charm_co.tscn"
 const PATH_WORKSHOP: String = "res://scenes/workshop.tscn"
 const PATH_GAME_OVER: String = "res://scenes/game_over.tscn"
 const PATH_VICTORY: String = "res://scenes/victory.tscn"
+const PATH_COINFLIP: String = "res://scenes/battle/coinflip.tscn"
+const PATH_DICE: String = "res://scenes/battle/dice.tscn"
+const PATH_SLOTS: String = "res://scenes/battle/slots.tscn"
+const PATH_BLACKJACK: String = "res://scenes/battle/blackjack.tscn"
+
 
 
 var _is_transitioning: bool = false
@@ -28,6 +33,18 @@ func change_scene(scene_path: String, fade: bool = true):
 		get_tree().change_scene_to_file(scene_path)
 	
 	_is_transitioning = false
+
+func go_to_current_minigame():
+	var minigame = GameManager.get_current_minigame()
+	match minigame:
+		"coinflip": change_scene(PATH_COINFLIP)
+		"dice": change_scene(PATH_DICE)
+		"slots": change_scene(PATH_SLOTS)
+		"blackjack": change_scene(PATH_BLACKJACK)
+		_: change_scene(PATH_DICE)
+
+
+
 
 
 func go_to_main_menu():
