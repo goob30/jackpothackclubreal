@@ -19,4 +19,11 @@ offset_right = 768.0
 offset_bottom = 264.0
 text = "DON'T CLICK ME                       "
 
+[node name="Label" type="Label" parent="." unique_id=1954814802]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 32.0
+offset_right = 216.0
+offset_bottom = 104.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
