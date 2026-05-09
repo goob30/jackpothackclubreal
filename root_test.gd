@@ -1,5 +1,5 @@
 extends Control
-
+# oindgsjik
 var serial: GdSerial
 var timer := 0.0
 
