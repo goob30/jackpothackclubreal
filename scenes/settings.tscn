@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://bvy5rcxjxv8e3"]
+
+[ext_resource type="Script" uid="uid://cmharpq7lc0pk" path="res://scenes/settings.gd" id="1_5p8wc"]
+
+[node name="Control" type="Control" unique_id=1625509189]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5p8wc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1687016797]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0.039215688, 0.015686275, 0.03137255, 1)
+
+[node name="Label" type="Label" parent="." unique_id=2105617922]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 32.0
+offset_right = 792.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 100
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="musicvolLabel" type="Label" parent="." unique_id=2104204238]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 395.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 40
+text = "Music Volume"
+vertical_alignment = 1
+
+[node name="musicVolumeSlider" type="HSlider" parent="." unique_id=207367290]
+layout_mode = 0
+offset_left = 784.0
+offset_top = 256.0
+offset_right = 1024.0
+offset_bottom = 320.0
+
+[node name="sfxVolLabel" type="Label" parent="." unique_id=620945122]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 336.0
+offset_right = 395.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 40
+text = "SFX Volume"
+vertical_alignment = 1
+
+[node name="sfxVolSlider" type="HSlider" parent="." unique_id=552272457]
+layout_mode = 0
+offset_left = 784.0
+offset_top = 336.0
+offset_right = 1024.0
+offset_bottom = 400.0
+
+[node name="scanSerialButton" type="Button" parent="." unique_id=1115487630]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 416.0
+offset_right = 393.0
+offset_bottom = 472.0
+theme_override_font_sizes/font_size = 32
+text = "Scan Serial ports"
+
+[node name="availabelComPortsLabel" type="Label" parent="." unique_id=1431055322]
+layout_mode = 0
+offset_left = 784.0
+offset_top = 416.0
+offset_right = 1024.0
+offset_bottom = 472.0
+text = "Available:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="chudLabel" type="Label" parent="." unique_id=1589422414]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 488.0
+offset_right = 395.0
+offset_bottom = 552.0
+theme_override_font_sizes/font_size = 40
+text = "Use Port:"
+vertical_alignment = 1
+
+[node name="comPortSelect" type="LineEdit" parent="." unique_id=1380139507]
+layout_mode = 0
+offset_left = 784.0
+offset_top = 488.0
+offset_right = 1024.0
+offset_bottom = 544.0
+placeholder_text = "Type full port (ex. COM5)"
+
+[node name="backButton" type="Button" parent="." unique_id=1719564753]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 40
+text = "<"
