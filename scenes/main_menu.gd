@@ -15,9 +15,9 @@ func _ready():
 
 func _on_normal_pressed():
 	GameManager.start_new_run(GameManager.MODE_NORMAL)
-	GameManager.debug_print_state()
+	SceneManager.go_to_elevator()
 
 
 func _on_baby_pressed():
 	GameManager.start_new_run(GameManager.MODE_BABY)
-	GameManager.debug_print_state()
+	SceneManager.go_to_elevator()

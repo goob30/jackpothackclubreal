@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="serialtest"
+run/main_scene="uid://wqf5ynve46xr"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -18,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*uid://cceqop67hroyc"
 InputManager="*uid://bk2jdd8m675b"
+SceneManager="*uid://dybqdsgmmbsnw"
 
 [editor_plugins]
 
