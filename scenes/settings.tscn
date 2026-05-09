@@ -11,13 +11,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5p8wc")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1687016797]
+[node name="Controldasfsa" type="Control" parent="." unique_id=123421201]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="aesr" type="Node" parent="." unique_id=1664241746]
+
+[node name="Control" type="Panel" parent="." unique_id=1829771191]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1687016797]
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 640.0
 color = Color(0.039215688, 0.015686275, 0.03137255, 1)
 
-[node name="Label" type="Label" parent="." unique_id=2105617922]
+[node name="Label" type="Label" parent="Control" unique_id=2105617922]
 layout_mode = 0
 offset_left = 360.0
 offset_top = 32.0
@@ -28,24 +40,24 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="musicvolLabel" type="Label" parent="." unique_id=2104204238]
+[node name="musicvolLabel" type="Label" parent="Control" unique_id=2104204238]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 256.0
-offset_right = 395.0
+offset_right = 399.0
 offset_bottom = 320.0
 theme_override_font_sizes/font_size = 40
 text = "Music Volume"
 vertical_alignment = 1
 
-[node name="musicVolumeSlider" type="HSlider" parent="." unique_id=207367290]
+[node name="musicVolumeSlider" type="HSlider" parent="Control" unique_id=207367290]
 layout_mode = 0
 offset_left = 784.0
 offset_top = 256.0
 offset_right = 1024.0
 offset_bottom = 320.0
 
-[node name="sfxVolLabel" type="Label" parent="." unique_id=620945122]
+[node name="sfxVolLabel" type="Label" parent="Control" unique_id=620945122]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 336.0
@@ -55,14 +67,14 @@ theme_override_font_sizes/font_size = 40
 text = "SFX Volume"
 vertical_alignment = 1
 
-[node name="sfxVolSlider" type="HSlider" parent="." unique_id=552272457]
+[node name="sfxVolSlider" type="HSlider" parent="Control" unique_id=552272457]
 layout_mode = 0
 offset_left = 784.0
 offset_top = 336.0
 offset_right = 1024.0
 offset_bottom = 400.0
 
-[node name="scanSerialButton" type="Button" parent="." unique_id=1115487630]
+[node name="scanSerialButton" type="Button" parent="Control" unique_id=1115487630]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 416.0
@@ -71,7 +83,7 @@ offset_bottom = 472.0
 theme_override_font_sizes/font_size = 32
 text = "Scan Serial ports"
 
-[node name="availabelComPortsLabel" type="Label" parent="." unique_id=1431055322]
+[node name="availabelComPortsLabel" type="Label" parent="Control" unique_id=1431055322]
 layout_mode = 0
 offset_left = 784.0
 offset_top = 416.0
@@ -82,7 +94,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="chudLabel" type="Label" parent="." unique_id=1589422414]
+[node name="chudLabel" type="Label" parent="Control" unique_id=1589422414]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 488.0
@@ -92,7 +104,7 @@ theme_override_font_sizes/font_size = 40
 text = "Use Port:"
 vertical_alignment = 1
 
-[node name="comPortSelect" type="LineEdit" parent="." unique_id=1380139507]
+[node name="comPortSelect" type="LineEdit" parent="Control" unique_id=1380139507]
 layout_mode = 0
 offset_left = 784.0
 offset_top = 488.0
@@ -100,7 +112,7 @@ offset_right = 1024.0
 offset_bottom = 544.0
 placeholder_text = "Type full port (ex. COM5)"
 
-[node name="backButton" type="Button" parent="." unique_id=1719564753]
+[node name="backButton" type="Button" parent="Control" unique_id=1719564753]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 64.0
@@ -109,7 +121,7 @@ offset_bottom = 128.0
 theme_override_font_sizes/font_size = 40
 text = "<"
 
-[connection signal="drag_ended" from="musicVolumeSlider" to="." method="_on_music_volume_slider_drag_ended"]
-[connection signal="drag_ended" from="sfxVolSlider" to="." method="_on_sfx_vol_slider_drag_ended"]
-[connection signal="pressed" from="scanSerialButton" to="." method="_on_scan_serial_button_pressed"]
-[connection signal="pressed" from="backButton" to="." method="_on_back_button_pressed"]
+[connection signal="drag_ended" from="Control/musicVolumeSlider" to="." method="_on_music_volume_slider_drag_ended"]
+[connection signal="drag_ended" from="Control/sfxVolSlider" to="." method="_on_sfx_vol_slider_drag_ended"]
+[connection signal="pressed" from="Control/scanSerialButton" to="." method="_on_scan_serial_button_pressed"]
+[connection signal="pressed" from="Control/backButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://b2ja2o1ekgumo"]
+
+[ext_resource type="Script" uid="uid://chpqie8wndduf" path="res://scenes/pause.gd" id="1_f1d2v"]
+
+[node name="Control" type="Control" unique_id=867128183]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f1d2v")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1819891110]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0.039215688, 0.015686275, 0.03137255, 0.49803922)
+
+[node name="Label" type="Label" parent="." unique_id=1319834302]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 32.0
+offset_right = 792.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 100
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="resumeButton" type="Button" parent="." unique_id=1015962088]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 256.0
+offset_right = 728.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 32
+text = "Resume"
+
+[node name="settingsButton" type="Button" parent="." unique_id=327432186]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 344.0
+offset_right = 728.0
+offset_bottom = 408.0
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="mainMenuButton" type="Button" parent="." unique_id=184986877]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 432.0
+offset_right = 728.0
+offset_bottom = 496.0
+theme_override_font_sizes/font_size = 32
+text = "Exit to Menu"
+
+[connection signal="pressed" from="settingsButton" to="." method="_on_settings_button_pressed"]

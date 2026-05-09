@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://wqf5ynve46xr"]
 
 [ext_resource type="Script" uid="uid://lge367w2ef7f" path="res://scenes/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://bvy5rcxjxv8e3" path="res://scenes/settings.tscn" id="2_ekxnf"]
 
 [node name="MainMenu" type="Control" unique_id=480168796]
 layout_mode = 3
@@ -86,5 +87,9 @@ layout_mode = 0
 offset_right = 176.0
 offset_bottom = 72.0
 text = "im setting it ouughgh"
+
+[node name="Control" parent="." unique_id=1625509189 instance=ExtResource("2_ekxnf")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
