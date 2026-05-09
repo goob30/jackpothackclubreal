@@ -1,3 +1,79 @@
 [gd_scene format=3 uid="uid://vprihrfif51c"]
 
-[node name="Coinflip" type="Node2D" unique_id=1048578142]
+[node name="Coinflip" type="Control" unique_id=1467326942]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background" type="ColorRect" parent="." unique_id=1855188796]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemyHalf" type="Panel" parent="." unique_id=1334369287]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LabelTag" type="Label" parent="EnemyHalf" unique_id=1783556623]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="EnemyPicture" type="TextureRect" parent="EnemyHalf" unique_id=1506820523]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemyName" type="Label" parent="EnemyHalf" unique_id=24979663]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="EnemiesRemainingBox" type="Panel" parent="EnemyHalf" unique_id=2036709668]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemiesRemainingBox" type="Label" parent="EnemyHalf/EnemiesRemainingBox" unique_id=54753559]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="NextAttackBox" type="Panel" parent="EnemyHalf" unique_id=328049832]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NextAttackLabel" type="Label" parent="EnemyHalf/NextAttackBox" unique_id=1630757473]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="EnemyHPContainer" type="HBoxContainer" parent="EnemyHalf" unique_id=774900575]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HPLabel" type="Label" parent="EnemyHalf/EnemyHPContainer" unique_id=2087610129]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="EnemyHalf/EnemyHPContainer" unique_id=187019210]
+layout_mode = 2
+
+[node name="HPValue" type="Label" parent="EnemyHalf/EnemyHPContainer" unique_id=2002821240]
+layout_mode = 2
+
+[node name="PlayerHalf" type="Panel" parent="." unique_id=1788938444]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GamemodeArea" type="Panel" parent="PlayerHalf" unique_id=1993658891]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Coin" type="Panel" parent="PlayerHalf/GamemodeArea" unique_id=1662065242]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
