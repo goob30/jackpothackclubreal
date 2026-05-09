@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://wqf5ynve46xr"]
+
+[node name="MainMenu" type="Control" unique_id=480168796]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=571816383]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleContainer" type="CenterContainer" parent="." unique_id=1495035226]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="TitleContainer" unique_id=1480548674]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=67501602]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Baby" type="Button" parent="VBoxContainer" unique_id=972681178]
+layout_mode = 2
+
+[node name="Normal" type="Button" parent="VBoxContainer" unique_id=898862394]
+layout_mode = 2
