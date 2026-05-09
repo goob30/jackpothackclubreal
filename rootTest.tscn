@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dsjeuk2088706"]
+
+[ext_resource type="Script" uid="uid://bhr6a5to8bjik" path="res://root_test.gd" id="1_ua4fx"]
+
+[node name="Control" type="Control" unique_id=1045682966]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ua4fx")
+
+[node name="Button" type="Button" parent="." unique_id=432454167]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 104.0
+offset_right = 768.0
+offset_bottom = 264.0
+text = "DON'T CLICK ME                       "
