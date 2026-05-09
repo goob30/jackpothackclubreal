@@ -1,28 +1,56 @@
 [gd_scene format=3 uid="uid://vprihrfif51c"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_743g7"]
+bg_color = Color(0.101960786, 0.023529412, 0.0627451, 1)
+border_width_bottom = 1
+border_color = Color(0.22745098, 0.039215688, 0.09411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_is51m"]
+bg_color = Color(0.039215688, 0.015686275, 0.03137255, 1)
+
 [node name="Coinflip" type="Control" unique_id=1467326942]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="." unique_id=1855188796]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039215688, 0.015686275, 0.03137255, 1)
 
 [node name="EnemyHalf" type="Panel" parent="." unique_id=1334369287]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 324.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_743g7")
 
 [node name="LabelTag" type="Label" parent="EnemyHalf" unique_id=1783556623]
-layout_mode = 0
+layout_mode = 1
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.83137256, 0.64705884, 0.25882354, 1)
+theme_override_font_sizes/font_size = 11
+text = "COINFLIP"
 
-[node name="EnemyPicture" type="TextureRect" parent="EnemyHalf" unique_id=1506820523]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="EnemyPortrait" type="TextureRect" parent="EnemyHalf" unique_id=1506820523]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 70.0
+grow_horizontal = 2
 
 [node name="EnemyName" type="Label" parent="EnemyHalf" unique_id=24979663]
 layout_mode = 0
@@ -64,9 +92,18 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="PlayerHalf" type="Panel" parent="." unique_id=1788938444]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -323.0
+offset_right = 4.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_is51m")
 
 [node name="GamemodeArea" type="Panel" parent="PlayerHalf" unique_id=1993658891]
 layout_mode = 0
@@ -77,3 +114,32 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="PlayerHPContainer" type="HBoxContainer" parent="PlayerHalf" unique_id=518791004]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HPLabel" type="Label" parent="PlayerHalf/PlayerHPContainer" unique_id=1587222016]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="PlayerHalf/PlayerHPContainer" unique_id=1515782057]
+layout_mode = 2
+
+[node name="HPValue" type="Label" parent="PlayerHalf/PlayerHPContainer" unique_id=143534088]
+layout_mode = 2
+
+[node name="ButtonHints" type="HBoxContainer" parent="PlayerHalf" unique_id=231883873]
+layout_mode = 0
+offset_left = 18.0
+offset_right = 18.0
+offset_bottom = 40.0
+
+[node name="HeadsHint" type="Label" parent="PlayerHalf/ButtonHints" unique_id=1874602232]
+layout_mode = 2
+
+[node name="TailsHint" type="Label" parent="PlayerHalf/ButtonHints" unique_id=779180213]
+layout_mode = 2
+
+[node name="FlipHint" type="Label" parent="PlayerHalf/ButtonHints" unique_id=672470682]
+layout_mode = 2
