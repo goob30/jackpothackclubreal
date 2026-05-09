@@ -23,10 +23,15 @@ var charm_inventory: Array = []
 
 var last_roll_value: int = 0
 
+var enemies_remaining: Array = []
+var current_enemy: Dictionary = {}
 
 signal hp_changed(new_hp: int, max_hp: int)
 signal gold_changed(new_gold: int)
 signal tokens_changed(new_tokens: int)
+signal enemy_defeated(enemy: Dictionary)
+signal floor_cleared
+signal new_enemy_appeared(enemy: Dictionary)
 signal floor_changed(new_floor: int)
 signal charm_equipped(charm: Dictionary)
 signal charm_unequipped(charm: Dictionary)
@@ -222,6 +227,44 @@ func is_baby_mode() -> bool:
 
 func is_normal_mode() -> bool:
 	return game_mode == MODE_NORMAL
+
+
+
+func start_floor_battle(enemies: Array):
+	enemies_remaining = enemies.duplicate()
+	_advance_to_next_enemy()
+
+
+func _advance_to_next_enemy():
+	if enemies_remaining.is_empty():
+		current_enemy = {}
+		floor_cleared.emit()
+		return
+	current_enemy = enemies_remaining.pop_front()
+	new_enemy_appeared.emit(current_enemy)
+
+
+func current_enemy_defeated():
+	if current_enemy.is_empty():
+		return
+	enemy_defeated.emit(current_enemy)
+	_advance_to_next_enemy()
+
+
+func current_enemy_take_damage(amount: int):
+	if current_enemy.is_empty():
+		return
+	current_enemy["hp"] = max(0, current_enemy.get("hp", 0) - amount)
+	if current_enemy["hp"] <= 0:
+		current_enemy_defeated()
+
+
+func get_current_minigame() -> String:
+	return current_enemy.get("minigame", "dice")
+
+
+func get_enemies_count() -> int:
+	return enemies_remaining.size() + (1 if not current_enemy.is_empty() else 0)
 
 
 func debug_give_resources():
