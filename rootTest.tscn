@@ -18,3 +18,5 @@ offset_top = 104.0
 offset_right = 768.0
 offset_bottom = 264.0
 text = "DON'T CLICK ME                       "
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

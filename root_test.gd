@@ -24,3 +24,8 @@ func _process(delta):
 func _exit_tree():
 	if serial and serial.is_open():
 		serial.close()
+
+
+func _on_button_pressed() -> void:
+	if serial.is_open():
+		serial.writeline("led")
