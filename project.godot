@@ -21,6 +21,7 @@ GameManager="*uid://cceqop67hroyc"
 InputManager="*uid://bk2jdd8m675b"
 SceneManager="*uid://dybqdsgmmbsnw"
 SettingsGlobal="*uid://w3hpirmn3la4"
+Global="*uid://djrnywp0u5g3s"
 
 [editor_plugins]
 

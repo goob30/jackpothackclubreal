@@ -27,7 +27,7 @@ func _on_scan_serial_button_pressed() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file(Global.last_scene_name)
 
 
 func _on_music_volume_slider_drag_ended(value_changed: bool) -> void:
