@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*uid://cceqop67hroyc"
 InputManager="*uid://bk2jdd8m675b"
 SceneManager="*uid://dybqdsgmmbsnw"
+SettingsGlobal="*uid://w3hpirmn3la4"
 
 [editor_plugins]
 

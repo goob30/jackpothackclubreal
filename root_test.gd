@@ -29,7 +29,6 @@ func _process(delta):
 					if serial_line == "act1":
 						$Button.text = "Holy shit it works"
 					last_serial_line = serial_line
-					# serial data logic handling
 
 func _on_button_pressed() -> void:
 	if serial and serial.is_open():

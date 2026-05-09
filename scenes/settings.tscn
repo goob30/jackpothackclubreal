@@ -109,4 +109,7 @@ offset_bottom = 128.0
 theme_override_font_sizes/font_size = 40
 text = "<"
 
+[connection signal="drag_ended" from="musicVolumeSlider" to="." method="_on_music_volume_slider_drag_ended"]
+[connection signal="drag_ended" from="sfxVolSlider" to="." method="_on_sfx_vol_slider_drag_ended"]
 [connection signal="pressed" from="scanSerialButton" to="." method="_on_scan_serial_button_pressed"]
+[connection signal="pressed" from="backButton" to="." method="_on_back_button_pressed"]
