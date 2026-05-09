@@ -26,6 +26,8 @@ func _process(delta):
 				serial_line = serial.readline().strip_edges()
 				if serial_line != last_serial_line and serial_line != "":
 					print("New data: ", serial_line)
+					if serial_line == "act1":
+						$Button.text = "Holy shit it works"
 					last_serial_line = serial_line
 					# serial data logic handling
 
