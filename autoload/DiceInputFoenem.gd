@@ -113,7 +113,6 @@ func parse_serial(line: String):
 	if line.begins_with("bt"):
 		if line.substr(2).is_valid_int(): bt_val = line.substr(2)
 		return
-	
 	print("Unknown serial message: ", line)
 
 
