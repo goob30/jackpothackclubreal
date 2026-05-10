@@ -22,6 +22,7 @@ InputManager="*uid://bk2jdd8m675b"
 SceneManager="*uid://dybqdsgmmbsnw"
 AudioController="*res://autoload/AudioController.gd"
 SpriteManager="*res://autoload/SpriteManager.gd"
+DiceInputFoenem="*res://autoload/DiceInputFoenem.gd"
 Global="*uid://djrnywp0u5g3s"
 SettingsGlobal="*uid://w3hpirmn3la4"
 
