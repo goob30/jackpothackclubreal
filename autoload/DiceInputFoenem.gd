@@ -2,6 +2,7 @@ extends Node
 # to get if its rolling, use DiceInputFoenem.rolling
 # to get the result, use
 # if !DiceInputFoenem.Rolling, DiceInputFoenem.current_face
+# && current_face != -1
 
 signal roll_started
 signal face_settled(face: int)
@@ -17,6 +18,7 @@ var face_count := 0
 var temp_face := 0
 var port_name: String = ""
 var connected: bool = false
+var bt_val
 
 
 func _ready():
@@ -108,6 +110,10 @@ func parse_serial(line: String):
 				print("Dice face: ", str(current_face))
 				face_settled.emit(current_face)
 		return
+	if line.begins_with("bt"):
+		
+		if line.substr(2).is_valid_int(): bt_val = line.substr(2)
+	
 	print("Unknown serial message: ", line)
 
 
