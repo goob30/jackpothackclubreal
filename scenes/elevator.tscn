@@ -1,21 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctcm0lqolgxry"]
+[gd_scene format=3 uid="uid://ctcm0lqolgxry"]
 
-[ext_resource type="Script" path="res://scenes/elevator.gd" id="1_elv"]
-[ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="2_bg"]
-
-[sub_resource type="StyleBoxFlat" id="panel_frame_box"]
-bg_color = Color(0.149, 0.063, 0.024, 0.94)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.541, 0.396, 0.122, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-shadow_color = Color(0, 0, 0, 0.6)
-shadow_size = 16
+[ext_resource type="Script" uid="uid://ccylgibc4s8ux" path="res://scenes/elevator.gd" id="1_elv"]
+[ext_resource type="Texture2D" uid="uid://bgd2xiiu724ly" path="res://assets/sprites/background/elevator.png" id="2_8lbij"]
 
 [sub_resource type="StyleBoxFlat" id="lcd_box"]
 bg_color = Color(0.024, 0.024, 0.039, 1)
@@ -29,6 +15,19 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxFlat" id="panel_frame_box"]
+bg_color = Color(0.149, 0.063, 0.024, 0.94)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.541, 0.396, 0.122, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_size = 16
+
 [sub_resource type="StyleBoxFlat" id="intercom_box"]
 bg_color = Color(0.063, 0.024, 0.039, 0.85)
 border_width_left = 2
@@ -41,7 +40,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Elevator" type="Control"]
+[node name="Elevator" type="Control" unique_id=1177508520]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_elv")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=37616169]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -58,11 +57,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_bg")
+texture = ExtResource("2_8lbij")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Vignette" type="ColorRect" parent="."]
+[node name="Vignette" type="ColorRect" parent="." unique_id=1936778350]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,7 +70,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.039, 0.012, 0.024, 0.55)
 
-[node name="Cabin" type="Control" parent="."]
+[node name="Cabin" type="Control" parent="." unique_id=1348385039]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -79,7 +78,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LCD" type="Panel" parent="Cabin"]
+[node name="LCD" type="Panel" parent="Cabin" unique_id=1451306420]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -91,7 +90,7 @@ offset_bottom = 170.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("lcd_box")
 
-[node name="LCDLabel" type="Label" parent="Cabin/LCD"]
+[node name="LCDLabel" type="Label" parent="Cabin/LCD" unique_id=568816256]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -106,7 +105,7 @@ theme_override_font_sizes/font_size = 14
 text = "—  CURRENT FLOOR  —"
 horizontal_alignment = 1
 
-[node name="FloorNumber" type="Label" parent="Cabin/LCD"]
+[node name="FloorNumber" type="Label" parent="Cabin/LCD" unique_id=602713381]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -121,9 +120,8 @@ theme_override_font_sizes/font_size = 64
 text = "01"
 horizontal_alignment = 1
 vertical_alignment = 1
-clip_contents = false
 
-[node name="DistrictName" type="Label" parent="Cabin/LCD"]
+[node name="DistrictName" type="Label" parent="Cabin/LCD" unique_id=314559326]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -138,7 +136,7 @@ theme_override_font_sizes/font_size = 22
 text = "THE PIT"
 horizontal_alignment = 1
 
-[node name="EventBanner" type="Label" parent="Cabin"]
+[node name="EventBanner" type="Label" parent="Cabin" unique_id=509640880]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -149,10 +147,9 @@ offset_right = 400.0
 offset_bottom = 220.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 28
-text = ""
 horizontal_alignment = 1
 
-[node name="PanelFrame" type="Panel" parent="Cabin"]
+[node name="PanelFrame" type="Panel" parent="Cabin" unique_id=1248205217]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -167,7 +164,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("panel_frame_box")
 
-[node name="ButtonGrid" type="GridContainer" parent="Cabin/PanelFrame"]
+[node name="ButtonGrid" type="GridContainer" parent="Cabin/PanelFrame" unique_id=1351014117]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -180,11 +177,11 @@ offset_right = 185.0
 offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 5
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
+columns = 5
 
-[node name="Intercom" type="Panel" parent="Cabin"]
+[node name="Intercom" type="Panel" parent="Cabin" unique_id=1192175899]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -199,18 +196,21 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("intercom_box")
 
-[node name="IntercomTag" type="Label" parent="Cabin/Intercom"]
+[node name="IntercomTag" type="Label" parent="Cabin/Intercom" unique_id=221456864]
 layout_mode = 1
 anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
 offset_left = 12.0
 offset_top = -10.0
 offset_right = 100.0
 offset_bottom = 14.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
 theme_override_font_sizes/font_size = 12
 text = "INTERCOM ▶"
 
-[node name="DialogueLabel" type="Label" parent="Cabin/Intercom"]
+[node name="DialogueLabel" type="Label" parent="Cabin/Intercom" unique_id=373225223]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,12 +223,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
 theme_override_font_sizes/font_size = 18
-text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="StatusStrip" type="HBoxContainer" parent="Cabin"]
+[node name="StatusStrip" type="HBoxContainer" parent="Cabin" unique_id=1522148615]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -243,31 +242,31 @@ grow_vertical = 0
 theme_override_constants/separation = 60
 alignment = 1
 
-[node name="HPLabel" type="Label" parent="Cabin/StatusStrip"]
+[node name="HPLabel" type="Label" parent="Cabin/StatusStrip" unique_id=1309478803]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.941, 1, 1)
 theme_override_font_sizes/font_size = 22
 text = "HP 20/20"
 
-[node name="GoldLabel" type="Label" parent="Cabin/StatusStrip"]
+[node name="GoldLabel" type="Label" parent="Cabin/StatusStrip" unique_id=1987150910]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
 theme_override_font_sizes/font_size = 22
 text = "0 g"
 
-[node name="TokenLabel" type="Label" parent="Cabin/StatusStrip"]
+[node name="TokenLabel" type="Label" parent="Cabin/StatusStrip" unique_id=1771206192]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.18, 0.533, 1)
 theme_override_font_sizes/font_size = 22
 text = "0 t"
 
-[node name="CharmLabel" type="Label" parent="Cabin/StatusStrip"]
+[node name="CharmLabel" type="Label" parent="Cabin/StatusStrip" unique_id=685606310]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
 theme_override_font_sizes/font_size = 18
 text = "0/5 charms"
 
-[node name="HelpHint" type="Label" parent="Cabin"]
+[node name="HelpHint" type="Label" parent="Cabin" unique_id=1744636559]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

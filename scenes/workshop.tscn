@@ -189,6 +189,32 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("card_box")
 
+[node name="CardBg" type="TextureRect" parent="PlayerCard"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+visible = false
+mouse_filter = 2
+
+[node name="CardFrame" type="TextureRect" parent="PlayerCard"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+visible = false
+mouse_filter = 2
+
 [node name="CardTitle" type="Label" parent="PlayerCard"]
 layout_mode = 1
 anchors_preset = 5
@@ -218,6 +244,17 @@ theme_override_font_sizes/font_size = 80
 text = "👤"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sprite" type="TextureRect" parent="PlayerCard/Avatar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 5
+visible = false
+mouse_filter = 2
 
 [node name="StatsLine" type="Label" parent="PlayerCard"]
 layout_mode = 1

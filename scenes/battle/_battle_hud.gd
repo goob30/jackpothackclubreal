@@ -97,10 +97,25 @@ func update_charm_strip():
 		if charm.is_empty():
 			continue
 		var lbl = Label.new()
-		lbl.text = String(charm.get("name", "?"))
+		lbl.text = CharmsData.get_emoji_for_charm(charm.id)
 		lbl.add_theme_color_override("font_color", CharmsData.get_rarity_color(charm.get("rarity", "common")))
-		lbl.add_theme_font_size_override("font_size", 14)
+		lbl.add_theme_font_size_override("font_size", 24)
+		lbl.custom_minimum_size = Vector2(34, 34)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		lbl.tooltip_text = String(charm.get("name", "?"))
 		charm_strip.add_child(lbl)
+
+		var sprite = TextureRect.new()
+		sprite.name = "Sprite"
+		sprite.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		sprite.texture_filter = TEXTURE_FILTER_NEAREST
+		sprite.visible = false
+		sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		lbl.add_child(sprite)
+		SpriteManager.apply(sprite, SpriteManager.charm_icon(charm.id), lbl)
 
 
 func set_button_hints(text: String):

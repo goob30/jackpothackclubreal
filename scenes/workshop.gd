@@ -10,6 +10,10 @@ extends Control
 @onready var pending_desc: Label = $PendingBanner/Description
 
 @onready var card_panel: Panel = $PlayerCard
+@onready var card_bg: TextureRect = $PlayerCard/CardBg
+@onready var card_frame: TextureRect = $PlayerCard/CardFrame
+@onready var card_avatar: Label = $PlayerCard/Avatar
+@onready var card_avatar_sprite: TextureRect = $PlayerCard/Avatar/Sprite
 @onready var card_stats: Label = $PlayerCard/StatsLine
 @onready var slots_row: HBoxContainer = $PlayerCard/SlotsRow
 
@@ -40,6 +44,9 @@ var _peel_armed: int = -1     # cursor index armed for destructive peel; -1 = no
 
 func _ready():
 	SpriteManager.apply_or_keep(background, SpriteManager.BG_CHARM_CO)
+	SpriteManager.apply(card_bg, SpriteManager.UI_PLAYER_CARD_BG, null)
+	SpriteManager.apply(card_frame, SpriteManager.UI_PLAYER_CARD_FRAME, null)
+	SpriteManager.apply(card_avatar_sprite, SpriteManager.UI_PLAYER_AVATAR, card_avatar)
 
 	back_button.pressed.connect(_back)
 	InputManager.button_2_left_pressed.connect(_on_left)
@@ -67,6 +74,17 @@ func _build_slot_panels():
 func _make_slot_panel(idx: int) -> Panel:
 	var panel = Panel.new()
 	panel.custom_minimum_size = Vector2(120, 150)
+
+	var frame = TextureRect.new()
+	frame.name = "SlotFrame"
+	frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	frame.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	frame.texture_filter = TEXTURE_FILTER_NEAREST
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	frame.visible = false
+	panel.add_child(frame)
+	SpriteManager.apply(frame, SpriteManager.UI_STICKER_SLOT, null)
 
 	var emoji = Label.new()
 	emoji.name = "Emoji"

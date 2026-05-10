@@ -65,6 +65,12 @@ const UI_MEDAL_CLEAR: String      = "res://assets/sprites/ui/medal_clear.png"
 const UI_CROWN: String            = "res://assets/sprites/ui/crown.png"
 const UI_DEVIL_SILHOUETTE: String = "res://assets/sprites/ui/devil_silhouette.png"
 
+# Player Card (Workshop)
+const UI_PLAYER_CARD_BG: String    = "res://assets/sprites/ui/player_card_bg.png"
+const UI_PLAYER_CARD_FRAME: String = "res://assets/sprites/ui/player_card_frame.png"
+const UI_PLAYER_AVATAR: String     = "res://assets/sprites/ui/player_avatar.png"
+const UI_STICKER_SLOT: String      = "res://assets/sprites/ui/sticker_slot.png"
+
 # Effects
 const FX_HIT: String        = "res://assets/sprites/effects/hit.png"
 const FX_HEAL: String       = "res://assets/sprites/effects/heal.png"

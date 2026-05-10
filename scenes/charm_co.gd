@@ -3,6 +3,9 @@ extends Control
 
 @onready var brass_button: Button = $Machine/BrassButton
 @onready var soul_button: Button = $Machine/SoulButton
+@onready var machine_body_sprite: TextureRect = $Machine/MachineBody
+@onready var glass_overlay_sprite: TextureRect = $Machine/GlassWindow/GlassOverlay
+@onready var tray_sprite: TextureRect = $Machine/Tray
 @onready var lever: Label = $Machine/Lever
 @onready var lever_sprite: TextureRect = $Machine/Lever/Sprite
 @onready var rolling_capsule: Label = $Machine/RollingCapsule
@@ -54,6 +57,9 @@ func _ready():
 	SpriteManager.apply_or_keep(background, SpriteManager.BG_CHARM_CO)
 	SpriteManager.apply(vendor_sprite, SpriteManager.VENDOR_DEFAULT, vendor_label)
 	SpriteManager.apply(lever_sprite, SpriteManager.MACHINE_LEVER, lever)
+	SpriteManager.apply(machine_body_sprite, SpriteManager.MACHINE_BODY, null)
+	SpriteManager.apply(glass_overlay_sprite, SpriteManager.MACHINE_GLASS, null)
+	SpriteManager.apply(tray_sprite, SpriteManager.MACHINE_TRAY, null)
 
 	_show_greeting()
 	_update_buttons()

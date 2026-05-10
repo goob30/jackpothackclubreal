@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdc7wrjwcbjnk"]
 
-[ext_resource type="Script" path="res://scenes/charm_co.gd" id="1_cco"]
-[ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="2_bg"]
+[ext_resource type="Script" uid="uid://b3yejuuxe202p" path="res://scenes/charm_co.gd" id="1_cco"]
+[ext_resource type="Texture2D" uid="uid://ccducyd50jau2" path="res://assets/sprites/background/charm_co.png" id="2_65vj6"]
 
 [sub_resource type="StyleBoxFlat" id="machine_bg"]
 bg_color = Color(0.122, 0.031, 0.063, 1)
@@ -27,7 +27,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="CharmCo" type="Control"]
+[node name="CharmCo" type="Control" unique_id=404980955]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +36,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cco")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=742562901]
+modulate = Color(0.45, 0.3, 0.4, 1)
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -44,12 +45,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_bg")
+texture = ExtResource("2_65vj6")
 expand_mode = 1
 stretch_mode = 6
-modulate = Color(0.45, 0.3, 0.4, 1)
 
-[node name="Vignette" type="ColorRect" parent="."]
+[node name="Vignette" type="ColorRect" parent="." unique_id=1271438847]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.063, 0.018, 0.039, 0.55)
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1974626651]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -73,7 +73,7 @@ theme_override_font_sizes/font_size = 60
 text = "CHARM CO."
 horizontal_alignment = 1
 
-[node name="HUDBar" type="HBoxContainer" parent="."]
+[node name="HUDBar" type="HBoxContainer" parent="." unique_id=78059373]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -84,56 +84,61 @@ offset_bottom = 60.0
 grow_horizontal = 2
 theme_override_constants/separation = 40
 
-[node name="GoldLabel" type="Label" parent="HUDBar"]
+[node name="GoldLabel" type="Label" parent="HUDBar" unique_id=1661939847]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
 theme_override_font_sizes/font_size = 22
 text = "Gold: 0"
 
-[node name="TokenLabel" type="Label" parent="HUDBar"]
+[node name="TokenLabel" type="Label" parent="HUDBar" unique_id=889715835]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.18, 0.533, 1)
 theme_override_font_sizes/font_size = 22
 text = "Tokens: 0"
 
-[node name="InventoryLabel" type="Label" parent="HUDBar"]
+[node name="InventoryLabel" type="Label" parent="HUDBar" unique_id=1228354317]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
 theme_override_font_sizes/font_size = 18
 text = "Charms: 0/5 equipped"
 
-[node name="DialogueBubble" type="Panel" parent="."]
+[node name="DialogueBubble" type="Panel" parent="." unique_id=1961349469]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 0.0
+anchors_preset = -1
 anchor_right = 0.5
 offset_left = 80.0
 offset_top = 140.0
 offset_right = -80.0
 offset_bottom = 240.0
+grow_horizontal = 0
 
-[node name="VendorEmoji" type="Label" parent="DialogueBubble"]
+[node name="VendorEmoji" type="Label" parent="DialogueBubble" unique_id=2127109525]
 layout_mode = 1
 anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
 offset_left = 16.0
 offset_top = -50.0
 offset_right = 80.0
 offset_bottom = 14.0
+grow_vertical = 2
 theme_override_font_sizes/font_size = 56
 text = "🧙"
 
-[node name="Sprite" type="TextureRect" parent="DialogueBubble/VendorEmoji"]
+[node name="Sprite" type="TextureRect" parent="DialogueBubble/VendorEmoji" unique_id=2138750849]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-visible = false
-mouse_filter = 2
 
-[node name="Label" type="Label" parent="DialogueBubble"]
+[node name="Label" type="Label" parent="DialogueBubble" unique_id=1004350238]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -147,10 +152,10 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
 theme_override_font_sizes/font_size = 18
 text = "Welcome."
-autowrap_mode = 3
 vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="Machine" type="Panel" parent="."]
+[node name="Machine" type="Panel" parent="." unique_id=1121479168]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -165,7 +170,20 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("machine_bg")
 
-[node name="MachineTitle" type="Label" parent="Machine"]
+[node name="MachineBody" type="TextureRect" parent="Machine" unique_id=1373826749]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MachineTitle" type="Label" parent="Machine" unique_id=1528823319]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -180,7 +198,7 @@ theme_override_font_sizes/font_size = 26
 text = "CAPSULE MACHINE"
 horizontal_alignment = 1
 
-[node name="GlassWindow" type="ColorRect" parent="Machine"]
+[node name="GlassWindow" type="ColorRect" parent="Machine" unique_id=712397612]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -192,7 +210,20 @@ offset_bottom = 240.0
 grow_horizontal = 2
 color = Color(0, 0.941, 1, 0.15)
 
-[node name="GlassEmojis" type="Label" parent="Machine/GlassWindow"]
+[node name="GlassOverlay" type="TextureRect" parent="Machine/GlassWindow" unique_id=1329689511]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="GlassEmojis" type="Label" parent="Machine/GlassWindow" unique_id=1235140392]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -206,7 +237,23 @@ text = "⚪🟢🔵🟣
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Lever" type="Label" parent="Machine"]
+[node name="Tray" type="TextureRect" parent="Machine" unique_id=918624525]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 244.0
+offset_right = 100.0
+offset_bottom = 304.0
+grow_horizontal = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Lever" type="Label" parent="Machine" unique_id=1066557160]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -216,24 +263,26 @@ offset_top = 250.0
 offset_right = 30.0
 offset_bottom = 310.0
 grow_horizontal = 2
+pivot_offset = Vector2(30, 30)
 theme_override_font_sizes/font_size = 50
 text = "🎰"
 horizontal_alignment = 1
 vertical_alignment = 1
-pivot_offset = Vector2(30, 30)
 
-[node name="Sprite" type="TextureRect" parent="Machine/Lever"]
+[node name="Sprite" type="TextureRect" parent="Machine/Lever" unique_id=1915386360]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-visible = false
-mouse_filter = 2
 
-[node name="RollingCapsule" type="Label" parent="Machine"]
+[node name="RollingCapsule" type="Label" parent="Machine" unique_id=649093965]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -243,24 +292,26 @@ offset_top = 60.0
 offset_right = 30.0
 offset_bottom = 120.0
 grow_horizontal = 2
+pivot_offset = Vector2(30, 30)
 theme_override_font_sizes/font_size = 60
 text = "⚪"
 horizontal_alignment = 1
 vertical_alignment = 1
-pivot_offset = Vector2(30, 30)
 
-[node name="Sprite" type="TextureRect" parent="Machine/RollingCapsule"]
+[node name="Sprite" type="TextureRect" parent="Machine/RollingCapsule" unique_id=1296094831]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-visible = false
-mouse_filter = 2
 
-[node name="BrassButton" type="Button" parent="Machine"]
+[node name="BrassButton" type="Button" parent="Machine" unique_id=248887167]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -276,7 +327,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 22
 text = "BRASS — 15g"
 
-[node name="SoulButton" type="Button" parent="Machine"]
+[node name="SoulButton" type="Button" parent="Machine" unique_id=60873282]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -292,7 +343,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 22
 text = "SOUL — 1 token"
 
-[node name="RevealPanel" type="Panel" parent="."]
+[node name="RevealPanel" type="Panel" parent="." unique_id=585362119]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -308,7 +359,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("reveal_bg")
 
-[node name="RevealTitle" type="Label" parent="RevealPanel"]
+[node name="RevealTitle" type="Label" parent="RevealPanel" unique_id=562137783]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -323,7 +374,7 @@ theme_override_font_sizes/font_size = 28
 text = "✦ NEW CHARM ✦"
 horizontal_alignment = 1
 
-[node name="ChargeIcon" type="Label" parent="RevealPanel"]
+[node name="ChargeIcon" type="Label" parent="RevealPanel" unique_id=1951875453]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -338,18 +389,20 @@ text = "⚪"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite" type="TextureRect" parent="RevealPanel/ChargeIcon"]
+[node name="Sprite" type="TextureRect" parent="RevealPanel/ChargeIcon" unique_id=590536433]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-visible = false
-mouse_filter = 2
 
-[node name="CharmName" type="Label" parent="RevealPanel"]
+[node name="CharmName" type="Label" parent="RevealPanel" unique_id=442802454]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -363,7 +416,7 @@ theme_override_font_sizes/font_size = 32
 text = "CHARM NAME"
 horizontal_alignment = 1
 
-[node name="CharmDesc" type="Label" parent="RevealPanel"]
+[node name="CharmDesc" type="Label" parent="RevealPanel" unique_id=1835217752]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -379,7 +432,7 @@ text = "Description"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=1563097212]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -392,7 +445,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 22
 text = "← Elevator"
 
-[node name="WorkshopButton" type="Button" parent="."]
+[node name="WorkshopButton" type="Button" parent="." unique_id=151123624]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
