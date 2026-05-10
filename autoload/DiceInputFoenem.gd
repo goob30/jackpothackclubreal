@@ -1,5 +1,7 @@
 extends Node
-
+# to get if its rolling, use DiceInputFoenem.rolling
+# to get the result, use
+# if !DiceInputFoenem.Rolling, DiceInputFoenem.current_face
 var serial: GdSerial
 
 var read_timer := 0.0
