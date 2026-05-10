@@ -26,4 +26,11 @@ offset_top = 32.0
 offset_right = 216.0
 offset_bottom = 104.0
 
+[node name="Label2" type="Label" parent="." unique_id=144087]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 304.0
+offset_right = 568.0
+offset_bottom = 400.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

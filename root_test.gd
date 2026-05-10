@@ -28,7 +28,10 @@ func _process(delta):
 					print("New data: ", serial_line)
 					if serial_line == "act1":
 						$Button.text = "Holy shit it works"
-					last_serial_line = serial_line
+					
+					if serial_line != last_serial_line:
+						last_serial_line = serial_line
+					$Label2.text = last_serial_line
 
 func _on_button_pressed() -> void:
 	if serial and serial.is_open():
