@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="serialtest"
+config/name="Deal with the Devil"
 run/main_scene="uid://wqf5ynve46xr"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 GameManager="*uid://cceqop67hroyc"
 InputManager="*uid://bk2jdd8m675b"
 SceneManager="*uid://dybqdsgmmbsnw"
+AudioController="*res://autoload/AudioController.gd"
+SpriteManager="*res://autoload/SpriteManager.gd"
 SettingsGlobal="*uid://w3hpirmn3la4"
 Global="*uid://djrnywp0u5g3s"
 

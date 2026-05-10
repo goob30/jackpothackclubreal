@@ -18,8 +18,9 @@ var current_floor: int = 1
 var run_number: int = 1
 var current_enemy_data: Dictionary = {}
 
-var equipped_charms: Array = []
-var charm_inventory: Array = []
+var equipped_charms: Array = [{}, {}, {}, {}, {}]
+var charm_inventory: Array = []  # legacy / unused — stickers no longer go in a bag
+var pending_charm: Dictionary = {}
 
 var last_roll_value: int = 0
 
@@ -37,15 +38,18 @@ signal charm_equipped(charm: Dictionary)
 signal charm_unequipped(charm: Dictionary)
 signal charm_added_to_inventory(charm: Dictionary)
 signal charm_lost(charm: Dictionary)
+signal slot_changed(slot_index: int, charm: Dictionary)
+signal pending_charm_set(charm: Dictionary)
+signal pending_charm_cleared
 signal player_died_normal
 signal player_died_baby
 signal game_won
 
 
 func get_district() -> String:
-	if current_floor <= 5:
+	if current_floor <= 10:
 		return "the_pit"
-	elif current_floor <= 10:
+	elif current_floor <= 20:
 		return "high_rollers"
 	else:
 		return "penthouse"
@@ -60,17 +64,17 @@ func get_district_display_name() -> String:
 
 
 func is_boss_floor() -> bool:
-	return current_floor == 5 or current_floor == 10 or current_floor == 15
+	return current_floor > 0 and current_floor % 5 == 0
 
 
 func is_final_floor() -> bool:
-	return current_floor == 15
+	return current_floor == 30
 
 
 func advance_floor():
 	current_floor += 1
 	floor_changed.emit(current_floor)
-	if current_floor > 15:
+	if current_floor > 30:
 		game_won.emit()
 
 
@@ -103,16 +107,16 @@ func _handle_baby_death():
 	tokens = int(tokens * 0.5)
 	tokens_changed.emit(tokens)
 	
-	if equipped_charms.size() > 0:
-		var lost_index = randi() % equipped_charms.size()
-		var lost_charm = equipped_charms[lost_index]
-		equipped_charms.remove_at(lost_index)
+	var filled_slots: Array = []
+	for i in range(equipped_charms.size()):
+		if not equipped_charms[i].is_empty():
+			filled_slots.append(i)
+	if filled_slots.size() > 0:
+		var pick = filled_slots[randi() % filled_slots.size()]
+		var lost_charm = equipped_charms[pick]
+		equipped_charms[pick] = {}
 		charm_lost.emit(lost_charm)
-	elif charm_inventory.size() > 0:
-		var lost_index = randi() % charm_inventory.size()
-		var lost_charm = charm_inventory[lost_index]
-		charm_inventory.remove_at(lost_index)
-		charm_lost.emit(lost_charm)
+		slot_changed.emit(pick, {})
 	
 	player_hp = player_max_hp
 	hp_changed.emit(player_hp, player_max_hp)
@@ -159,44 +163,153 @@ func spend_tokens(amount: int) -> bool:
 	return false
 
 
+func count_equipped() -> int:
+	var n = 0
+	for c in equipped_charms:
+		if not c.is_empty():
+			n += 1
+	return n
+
+
+func first_empty_slot() -> int:
+	for i in range(equipped_charms.size()):
+		if equipped_charms[i].is_empty():
+			return i
+	return -1
+
+
+func is_slot_empty(idx: int) -> bool:
+	if idx < 0 or idx >= equipped_charms.size():
+		return true
+	return equipped_charms[idx].is_empty()
+
+
+func get_slot(idx: int) -> Dictionary:
+	if idx < 0 or idx >= equipped_charms.size():
+		return {}
+	return equipped_charms[idx]
+
+
 func can_equip_more_charms() -> bool:
-	return equipped_charms.size() < MAX_EQUIPPED_CHARMS
+	return first_empty_slot() >= 0
+
+
+# Place a sticker at a specific slot. If the slot already has a sticker,
+# it is destroyed (charm_lost emitted). Returns the destroyed sticker, or {} if empty.
+func place_charm_at_slot(charm: Dictionary, idx: int) -> Dictionary:
+	if idx < 0 or idx >= equipped_charms.size():
+		return {}
+	var old = equipped_charms[idx]
+	equipped_charms[idx] = charm
+	if not old.is_empty():
+		charm_lost.emit(old)
+	if not charm.is_empty():
+		charm_equipped.emit(charm)
+	slot_changed.emit(idx, charm)
+	return old
+
+
+# Peel sticker off a slot — destroys it permanently.
+func peel_slot(idx: int) -> bool:
+	if idx < 0 or idx >= equipped_charms.size():
+		return false
+	var old = equipped_charms[idx]
+	if old.is_empty():
+		return false
+	equipped_charms[idx] = {}
+	charm_lost.emit(old)
+	charm_unequipped.emit(old)
+	slot_changed.emit(idx, {})
+	return true
 
 
 func equip_charm(charm: Dictionary) -> bool:
-	if equipped_charms.size() >= MAX_EQUIPPED_CHARMS:
+	var idx = first_empty_slot()
+	if idx < 0:
 		return false
-	equipped_charms.append(charm)
-	charm_inventory.erase(charm)
+	equipped_charms[idx] = charm
 	charm_equipped.emit(charm)
+	slot_changed.emit(idx, charm)
 	return true
 
 
 func unequip_charm(charm: Dictionary):
-	if charm in equipped_charms:
-		equipped_charms.erase(charm)
-		charm_inventory.append(charm)
-		charm_unequipped.emit(charm)
+	# In the sticker model, unequip = peel = destroy. Find the slot and peel it.
+	for i in range(equipped_charms.size()):
+		if equipped_charms[i].get("id") == charm.get("id"):
+			peel_slot(i)
+			return
 
 
+# Pull-time entry point. If a slot is free, the sticker auto-applies.
+# Otherwise it becomes a pending sticker that the player must place
+# (replacing an existing one) or discard, via the Workshop / Player Card scene.
 func add_charm_to_inventory(charm: Dictionary):
-	if can_equip_more_charms():
-		equipped_charms.append(charm)
+	var idx = first_empty_slot()
+	if idx >= 0:
+		equipped_charms[idx] = charm
 		charm_equipped.emit(charm)
+		slot_changed.emit(idx, charm)
+		charm_added_to_inventory.emit(charm)
 	else:
-		charm_inventory.append(charm)
-	charm_added_to_inventory.emit(charm)
+		set_pending_charm(charm)
 
 
 func get_equipped_charms() -> Array:
-	return equipped_charms
+	# Returns only filled slots (skips empties) — convenience for resolvers/UI.
+	var filled: Array = []
+	for c in equipped_charms:
+		if not c.is_empty():
+			filled.append(c)
+	return filled
 
 
 func has_charm_equipped(charm_id: String) -> bool:
 	for c in equipped_charms:
+		if c.is_empty():
+			continue
 		if c.get("id") == charm_id:
 			return true
 	return false
+
+
+# ─── Pending sticker (just-pulled, awaiting placement) ───
+func set_pending_charm(charm: Dictionary):
+	if not pending_charm.is_empty():
+		# Replacing an unresolved pending sticker — the old one is destroyed.
+		charm_lost.emit(pending_charm)
+	pending_charm = charm
+	pending_charm_set.emit(charm)
+
+
+func clear_all_charms():
+	for i in range(equipped_charms.size()):
+		equipped_charms[i] = {}
+		slot_changed.emit(i, {})
+	discard_pending_charm()
+
+
+func discard_pending_charm():
+	if pending_charm.is_empty():
+		return
+	var lost = pending_charm
+	pending_charm = {}
+	charm_lost.emit(lost)
+	pending_charm_cleared.emit()
+
+
+func place_pending_at_slot(idx: int) -> bool:
+	if pending_charm.is_empty():
+		return false
+	var charm = pending_charm
+	pending_charm = {}
+	place_charm_at_slot(charm, idx)
+	pending_charm_cleared.emit()
+	return true
+
+
+func has_pending_charm() -> bool:
+	return not pending_charm.is_empty()
 
 
 func start_new_run(mode: String):
@@ -211,14 +324,18 @@ func reset_run():
 	tokens = 0
 	current_floor = 1
 	run_number += 1
-	equipped_charms.clear()
+	equipped_charms = [{}, {}, {}, {}, {}]
 	charm_inventory.clear()
+	pending_charm = {}
 	last_roll_value = 0
 	current_enemy_data = {}
 	hp_changed.emit(player_hp, player_max_hp)
 	gold_changed.emit(gold)
 	tokens_changed.emit(tokens)
 	floor_changed.emit(current_floor)
+	pending_charm_cleared.emit()
+	for i in range(equipped_charms.size()):
+		slot_changed.emit(i, {})
 
 
 func is_baby_mode() -> bool:
@@ -279,7 +396,12 @@ func debug_print_state():
 	print("HP: %d/%d" % [player_hp, player_max_hp])
 	print("Gold: %d, Tokens: %d" % [gold, tokens])
 	print("Floor: %d (%s)" % [current_floor, get_district_display_name()])
-	print("Equipped charms (%d/%d):" % [equipped_charms.size(), MAX_EQUIPPED_CHARMS])
-	for c in equipped_charms:
-		print("  - ", c.get("name", "?"))
-	print("Inventory: %d charms" % charm_inventory.size())
+	print("Sticker slots (%d/%d):" % [count_equipped(), MAX_EQUIPPED_CHARMS])
+	for i in range(equipped_charms.size()):
+		var c = equipped_charms[i]
+		if c.is_empty():
+			print("  [%d] —" % (i + 1))
+		else:
+			print("  [%d] %s" % [i + 1, c.get("name", "?")])
+	if has_pending_charm():
+		print("Pending sticker: %s" % pending_charm.get("name"))

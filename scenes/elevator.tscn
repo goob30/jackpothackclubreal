@@ -1,3 +1,299 @@
-[gd_scene format=3 uid="uid://ctcm0lqolgxry"]
+[gd_scene load_steps=5 format=3 uid="uid://ctcm0lqolgxry"]
 
-[node name="Elevator" type="Node2D" unique_id=1560573849]
+[ext_resource type="Script" path="res://scenes/elevator.gd" id="1_elv"]
+[ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="2_bg"]
+
+[sub_resource type="StyleBoxFlat" id="panel_frame_box"]
+bg_color = Color(0.149, 0.063, 0.024, 0.94)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.541, 0.396, 0.122, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="lcd_box"]
+bg_color = Color(0.024, 0.024, 0.039, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.541, 0.082, 0.176, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="intercom_box"]
+bg_color = Color(0.063, 0.024, 0.039, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.831, 0.647, 0.259, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Elevator" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_elv")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Vignette" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039, 0.012, 0.024, 0.55)
+
+[node name="Cabin" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LCD" type="Panel" parent="Cabin"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 30.0
+offset_right = 260.0
+offset_bottom = 170.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("lcd_box")
+
+[node name="LCDLabel" type="Label" parent="Cabin/LCD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 6.0
+offset_right = 100.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
+theme_override_font_sizes/font_size = 14
+text = "—  CURRENT FLOOR  —"
+horizontal_alignment = 1
+
+[node name="FloorNumber" type="Label" parent="Cabin/LCD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 24.0
+offset_right = 180.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.902, 0.086, 0.286, 1)
+theme_override_font_sizes/font_size = 86
+text = "01"
+horizontal_alignment = 1
+
+[node name="DistrictName" type="Label" parent="Cabin/LCD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 110.0
+offset_right = 240.0
+offset_bottom = 138.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
+theme_override_font_sizes/font_size = 22
+text = "THE PIT"
+horizontal_alignment = 1
+
+[node name="EventBanner" type="Label" parent="Cabin"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 180.0
+offset_right = 400.0
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = ""
+horizontal_alignment = 1
+
+[node name="PanelFrame" type="Panel" parent="Cabin"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -280.0
+offset_right = 210.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("panel_frame_box")
+
+[node name="PanelTitle" type="Label" parent="Cabin/PanelFrame"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 12.0
+offset_right = 200.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.961, 0.784, 0.412, 1)
+theme_override_font_sizes/font_size = 18
+text = "DEAL HOTEL ✦ FLOOR SELECT"
+horizontal_alignment = 1
+
+[node name="ButtonGrid" type="GridContainer" parent="Cabin/PanelFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -260.0
+offset_right = 185.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+
+[node name="Intercom" type="Panel" parent="Cabin"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -440.0
+offset_top = -240.0
+offset_right = 440.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("intercom_box")
+
+[node name="IntercomTag" type="Label" parent="Cabin/Intercom"]
+layout_mode = 1
+anchors_preset = 4
+offset_left = 12.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
+theme_override_font_sizes/font_size = 12
+text = "INTERCOM ▶"
+
+[node name="DialogueLabel" type="Label" parent="Cabin/Intercom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
+theme_override_font_sizes/font_size = 18
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="StatusStrip" type="HBoxContainer" parent="Cabin"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -120.0
+offset_right = -60.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="HPLabel" type="Label" parent="Cabin/StatusStrip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.941, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "HP 20/20"
+
+[node name="GoldLabel" type="Label" parent="Cabin/StatusStrip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
+theme_override_font_sizes/font_size = 22
+text = "0 g"
+
+[node name="TokenLabel" type="Label" parent="Cabin/StatusStrip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.18, 0.533, 1)
+theme_override_font_sizes/font_size = 22
+text = "0 t"
+
+[node name="CharmLabel" type="Label" parent="Cabin/StatusStrip"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
+theme_override_font_sizes/font_size = 18
+text = "0/5 charms"
+
+[node name="HelpHint" type="Label" parent="Cabin"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -56.0
+offset_right = 360.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
+theme_override_font_sizes/font_size = 14
+text = "[←] cycle    [→] cycle    [SPACE] press    [1-6] dice = jump to floor"
+horizontal_alignment = 1

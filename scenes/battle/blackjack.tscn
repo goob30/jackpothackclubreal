@@ -1,3 +1,74 @@
-[gd_scene format=3 uid="uid://krsp3m5h1rea"]
+[gd_scene load_steps=3 format=3 uid="uid://b1bjbattle0001"]
 
-[node name="Blackjack" type="Node2D" unique_id=170465743]
+[ext_resource type="PackedScene" path="res://scenes/battle/_battle_hud.tscn" id="1_hud"]
+[ext_resource type="Script" path="res://scenes/battle/blackjack.gd" id="2_bj"]
+
+[node name="Blackjack" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_bj")
+
+[node name="BattleHUD" parent="." instance=ExtResource("1_hud")]
+layout_mode = 1
+
+[node name="EnemyHandBox" type="HBoxContainer" parent="BattleHUD/PlayerHalf/GameAreaContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 0.0
+offset_right = 300.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TotalsLabel" type="Label" parent="BattleHUD/PlayerHalf/GameAreaContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 90.0
+offset_right = 300.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
+theme_override_font_sizes/font_size = 22
+text = "Player: 0   |   Dealer: 0"
+horizontal_alignment = 1
+
+[node name="PlayerHandBox" type="HBoxContainer" parent="BattleHUD/PlayerHalf/GameAreaContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 140.0
+offset_right = 300.0
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ResultLabel" type="Label" parent="BattleHUD/PlayerHalf/GameAreaContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -40.0
+offset_right = 200.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = ""
+horizontal_alignment = 1

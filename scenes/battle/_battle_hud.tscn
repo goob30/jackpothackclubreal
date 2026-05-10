@@ -1,15 +1,18 @@
-[gd_scene format=3 uid="uid://vprihrfif51c"]
+[gd_scene format=3 uid="uid://lgb4k5t58vwa"]
 
-[ext_resource type="Script" uid="uid://ddhqu570e0iam" path="res://scenes/battle/coinflip.gd" id="1_is51m"]
+[ext_resource type="Script" path="res://scenes/battle/_battle_hud.gd" id="1_hud"]
 [ext_resource type="Texture2D" uid="uid://dn5swxnx3jxgg" path="res://assets/healthbar.png" id="2_hpframe"]
 [ext_resource type="Texture2D" uid="uid://jea82xj3bngx" path="res://assets/healthbarplayer.png" id="3_hpplayer"]
 [ext_resource type="Texture2D" path="res://assets/healthbarenemy.png" id="4_hpenemy"]
 [ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="5_bg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enemy_half"]
+[sub_resource type="StyleBoxFlat" id="enemy_half_bg"]
 bg_color = Color(0.102, 0.024, 0.063, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_infobox"]
+[sub_resource type="StyleBoxFlat" id="player_half_bg"]
+bg_color = Color(0.039, 0.016, 0.031, 1)
+
+[sub_resource type="StyleBoxFlat" id="infobox_bg"]
 bg_color = Color(0.122, 0.031, 0.063, 1)
 border_width_left = 1
 border_width_top = 1
@@ -21,52 +24,37 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpbar_bg"]
+[sub_resource type="StyleBoxFlat" id="hpbar_bg"]
 bg_color = Color(0, 0, 0, 0.6)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpbar_enemy"]
+[sub_resource type="StyleBoxFlat" id="hpbar_enemy_fill"]
 bg_color = Color(0.902, 0.086, 0.286, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_player_half"]
-bg_color = Color(0.039, 0.016, 0.031, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gamemode"]
-bg_color = Color(0.102, 0.024, 0.063, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.831, 0.647, 0.259, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpbar_player"]
+[sub_resource type="StyleBoxFlat" id="hpbar_player_fill"]
 bg_color = Color(0, 0.941, 1, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="Coinflip" type="Control" unique_id=2102191050]
+[node name="BattleHUD" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_is51m")
+script = ExtResource("1_hud")
 
-[node name="Background" type="TextureRect" parent="." unique_id=959155376]
+[node name="Background" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -77,26 +65,41 @@ grow_vertical = 2
 texture = ExtResource("5_bg")
 expand_mode = 1
 stretch_mode = 6
-modulate = Color(0.55, 0.4, 0.5, 1)
+modulate = Color(0.5, 0.35, 0.45, 1)
 
-[node name="EnemyHalf" type="Panel" parent="." unique_id=1213401719]
+[node name="EnemyHalf" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_enemy_half")
+theme_override_styles/panel = SubResource("enemy_half_bg")
 
-[node name="EnemyPortrait" type="Label" parent="EnemyHalf" unique_id=2065211153]
+[node name="FloorLabel" type="Label" parent="EnemyHalf"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 8.0
+offset_right = 250.0
+offset_bottom = 36.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
+theme_override_font_sizes/font_size = 18
+text = "FLOOR 1 — THE PIT"
+horizontal_alignment = 1
+
+[node name="EnemyPortrait" type="Label" parent="EnemyHalf"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -90.0
-offset_right = 60.0
+offset_left = -80.0
+offset_top = -110.0
+offset_right = 80.0
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -105,46 +108,42 @@ text = "😈"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnemyName" type="Label" parent="EnemyHalf" unique_id=2065943829]
+[node name="Sprite" type="TextureRect" parent="EnemyHalf/EnemyPortrait"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 5
+visible = false
+mouse_filter = 2
+
+[node name="EnemyName" type="Label" parent="EnemyHalf"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = 50.0
-offset_right = 150.0
-offset_bottom = 90.0
+offset_left = -200.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.902, 0.086, 0.286, 1)
 theme_override_font_sizes/font_size = 28
-text = "IMP"
+text = "ENEMY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QueueLabel" type="Label" parent="EnemyHalf" unique_id=2085147021]
+[node name="QueueContainer" type="HBoxContainer" parent="EnemyHalf"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -200.0
-offset_top = 16.0
-offset_right = -20.0
-offset_bottom = 40.0
-grow_horizontal = 0
-theme_override_colors/font_color = Color(0.533, 0.533, 0.533, 1)
-theme_override_font_sizes/font_size = 11
-text = "REMAINING"
-horizontal_alignment = 2
-
-[node name="QueueIcons" type="HBoxContainer" parent="EnemyHalf" unique_id=832016774]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -200.0
+offset_left = -240.0
 offset_top = 40.0
 offset_right = -20.0
 offset_bottom = 80.0
@@ -152,22 +151,7 @@ grow_horizontal = 0
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="Queue1" type="Label" parent="EnemyHalf/QueueIcons" unique_id=674388876]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "😈"
-
-[node name="Queue2" type="Label" parent="EnemyHalf/QueueIcons" unique_id=474816395]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "🎴"
-
-[node name="Queue3" type="Label" parent="EnemyHalf/QueueIcons" unique_id=1382626820]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "👻"
-
-[node name="NextAttackBox" type="Panel" parent="EnemyHalf" unique_id=1877476007]
+[node name="NextAttackBox" type="Panel" parent="EnemyHalf"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -175,36 +159,37 @@ anchor_right = 1.0
 offset_left = -130.0
 offset_top = 90.0
 offset_right = -20.0
-offset_bottom = 140.0
+offset_bottom = 150.0
 grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_infobox")
+theme_override_styles/panel = SubResource("infobox_bg")
 
-[node name="NextAttackLabel" type="Label" parent="EnemyHalf/NextAttackBox" unique_id=175670800]
+[node name="NextAttackLabel" type="Label" parent="EnemyHalf/NextAttackBox"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 6.0
+offset_bottom = 22.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_colors/font_color = Color(0.533, 0.533, 0.533, 1)
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 11
 text = "NEXT ATTACK"
 horizontal_alignment = 1
 
-[node name="NextAttackValue" type="Label" parent="EnemyHalf/NextAttackBox" unique_id=1162812564]
+[node name="NextAttackValue" type="Label" parent="EnemyHalf/NextAttackBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
-theme_override_font_sizes/font_size = 22
-text = "3"
+theme_override_font_sizes/font_size = 26
+text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnemyHPContainer" type="HBoxContainer" parent="EnemyHalf" unique_id=1916098672]
+[node name="EnemyHPContainer" type="HBoxContainer" parent="EnemyHalf"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -218,7 +203,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="HPLabel" type="Label" parent="EnemyHalf/EnemyHPContainer" unique_id=1501214974]
+[node name="HPLabel" type="Label" parent="EnemyHalf/EnemyHPContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.533, 0.533, 0.533, 1)
@@ -226,7 +211,7 @@ theme_override_font_sizes/font_size = 11
 text = "HP"
 vertical_alignment = 1
 
-[node name="EnemyHPBar" type="TextureProgressBar" parent="EnemyHalf/EnemyHPContainer" unique_id=700312068]
+[node name="EnemyHPBar" type="TextureProgressBar" parent="EnemyHalf/EnemyHPContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -242,8 +227,8 @@ stretch_margin_top = 4
 stretch_margin_right = 4
 stretch_margin_bottom = 4
 
-[node name="HPValue" type="Label" parent="EnemyHalf/EnemyHPContainer" unique_id=1505424073]
-custom_minimum_size = Vector2(60, 0)
+[node name="HPValue" type="Label" parent="EnemyHalf/EnemyHPContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
 theme_override_font_sizes/font_size = 12
@@ -251,7 +236,7 @@ text = "5/5"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="PlayerHalf" type="Panel" parent="." unique_id=1217993924]
+[node name="PlayerHalf" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -259,48 +244,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_player_half")
+theme_override_styles/panel = SubResource("player_half_bg")
 
-[node name="GamemodeArea" type="Panel" parent="PlayerHalf" unique_id=2100072206]
+[node name="GameAreaContainer" type="Control" parent="PlayerHalf"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -100.0
-offset_right = 180.0
-offset_bottom = 30.0
+offset_left = -350.0
+offset_top = -160.0
+offset_right = 350.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gamemode")
 
-[node name="Coin" type="Label" parent="PlayerHalf/GamemodeArea" unique_id=838168245]
+[node name="CharmStrip" type="HBoxContainer" parent="PlayerHalf"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 8.0
+offset_right = 300.0
+offset_bottom = 32.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
-theme_override_font_sizes/font_size = 80
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/separation = 12
+alignment = 1
 
-[node name="Sprite" type="TextureRect" parent="PlayerHalf/GamemodeArea/Coin" unique_id=838168246]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-expand_mode = 1
-stretch_mode = 5
-visible = false
-mouse_filter = 2
-
-[node name="PlayerHPContainer" type="HBoxContainer" parent="PlayerHalf" unique_id=1890216051]
+[node name="PlayerHPContainer" type="HBoxContainer" parent="PlayerHalf"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -314,7 +287,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="HPLabel" type="Label" parent="PlayerHalf/PlayerHPContainer" unique_id=813447381]
+[node name="HPLabel" type="Label" parent="PlayerHalf/PlayerHPContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.533, 0.533, 0.533, 1)
@@ -322,7 +295,7 @@ theme_override_font_sizes/font_size = 11
 text = "HP"
 vertical_alignment = 1
 
-[node name="PlayerHPBar" type="TextureProgressBar" parent="PlayerHalf/PlayerHPContainer" unique_id=2075827748]
+[node name="PlayerHPBar" type="TextureProgressBar" parent="PlayerHalf/PlayerHPContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -338,8 +311,8 @@ stretch_margin_top = 4
 stretch_margin_right = 4
 stretch_margin_bottom = 4
 
-[node name="HPValue" type="Label" parent="PlayerHalf/PlayerHPContainer" unique_id=1654308482]
-custom_minimum_size = Vector2(60, 0)
+[node name="HPValue" type="Label" parent="PlayerHalf/PlayerHPContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
 theme_override_font_sizes/font_size = 12
@@ -347,20 +320,27 @@ text = "20/20"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ButtonHints" type="Label" parent="PlayerHalf" unique_id=343271723]
+[node name="ButtonHints" type="Label" parent="PlayerHalf"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -250.0
+offset_left = -300.0
 offset_top = -36.0
-offset_right = 250.0
+offset_right = 300.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.533, 0.533, 0.533, 1)
-theme_override_font_sizes/font_size = 13
-text = "[←] HEADS     [→] TAILS     [SPACE] FLIP"
+theme_override_font_sizes/font_size = 14
+text = "[←] LEFT     [→] RIGHT     [SPACE] CONFIRM"
 horizontal_alignment = 1
+
+[node name="DamageNumberLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2

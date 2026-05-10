@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ceeajgh2dkvnk"]
+
+[ext_resource type="PackedScene" path="res://scenes/battle/_battle_hud.tscn" id="1_hud"]
+[ext_resource type="Script" path="res://scenes/battle/dice.gd" id="2_dice"]
+
+[node name="Dice" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_dice")
+
+[node name="BattleHUD" parent="." instance=ExtResource("1_hud")]
+layout_mode = 1
+
+[node name="DiceRow" type="HBoxContainer" parent="BattleHUD/PlayerHalf/GameAreaContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -80.0
+offset_right = 250.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="PlayerDie" type="Label" parent="BattleHUD/PlayerHalf/GameAreaContainer/DiceRow"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.941, 1, 1)
+theme_override_font_sizes/font_size = 120
+text = "⚀"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite" type="TextureRect" parent="BattleHUD/PlayerHalf/GameAreaContainer/DiceRow/PlayerDie"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 5
+visible = false
+mouse_filter = 2
+
+[node name="Versus" type="Label" parent="BattleHUD/PlayerHalf/GameAreaContainer/DiceRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
+theme_override_font_sizes/font_size = 48
+text = "VS"
+vertical_alignment = 1
+
+[node name="EnemyDie" type="Label" parent="BattleHUD/PlayerHalf/GameAreaContainer/DiceRow"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.902, 0.086, 0.286, 1)
+theme_override_font_sizes/font_size = 120
+text = "⚀"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite" type="TextureRect" parent="BattleHUD/PlayerHalf/GameAreaContainer/DiceRow/EnemyDie"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 5
+visible = false
+mouse_filter = 2

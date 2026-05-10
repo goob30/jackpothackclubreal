@@ -8,6 +8,7 @@ const PATH_ELEVATOR: String = "res://scenes/elevator.tscn"
 const PATH_BATTLE: String = "res://scenes/battle.tscn"
 const PATH_CHARM_CO: String = "res://scenes/charm_co.tscn"
 const PATH_WORKSHOP: String = "res://scenes/workshop.tscn"
+const PATH_REWARD: String = "res://scenes/reward.tscn"
 const PATH_GAME_OVER: String = "res://scenes/game_over.tscn"
 const PATH_VICTORY: String = "res://scenes/victory.tscn"
 const PATH_COINFLIP: String = "res://scenes/battle/coinflip.tscn"
@@ -65,6 +66,10 @@ func go_to_charm_co():
 
 func go_to_workshop():
 	change_scene(PATH_WORKSHOP)
+
+
+func go_to_reward():
+	change_scene(PATH_REWARD)
 
 
 func go_to_game_over():
