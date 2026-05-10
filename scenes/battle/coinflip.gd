@@ -2,13 +2,13 @@ extends Control
 
 
 @onready var enemy_portrait: Label = $EnemyHalf/EnemyPortrait
+@onready var enemy_portrait_sprite: TextureRect = $EnemyHalf/EnemyPortrait/Sprite
 @onready var enemy_name: Label = $EnemyHalf/EnemyName
 @onready var enemy_hp_bar: TextureProgressBar = $EnemyHalf/EnemyHPContainer/EnemyHPBar
 @onready var enemy_hp_value: Label = $EnemyHalf/EnemyHPContainer/HPValue
 @onready var next_attack_value: Label = $EnemyHalf/NextAttackBox/NextAttackValue
 @onready var coin: Label = $PlayerHalf/GamemodeArea/Coin
 @onready var coin_sprite: TextureRect = $PlayerHalf/GamemodeArea/Coin/Sprite
-@onready var enemy_portrait_sprite: TextureRect = null
 @onready var background: TextureRect = $Background
 @onready var player_hp_bar: TextureProgressBar = $PlayerHalf/PlayerHPContainer/PlayerHPBar
 @onready var player_hp_value: Label = $PlayerHalf/PlayerHPContainer/HPValue
@@ -23,11 +23,7 @@ const DAMAGE: int = 2
 func _ready():
 	if GameManager.current_enemy.is_empty():
 		GameManager.start_new_run(GameManager.MODE_NORMAL)
-		GameManager.start_floor_battle([
-			{"id": "imp", "name": "Imp", "hp": 5, "max_hp": 5, "minigame": "coinflip", "next_attack": 3, "portrait": "😈"},
-			{"id": "shark", "name": "Card Shark", "hp": 8, "max_hp": 8, "minigame": "coinflip", "next_attack": 4, "portrait": "🎴"},
-			{"id": "soul", "name": "Lost Soul", "hp": 6, "max_hp": 6, "minigame": "coinflip", "next_attack": 2, "portrait": "👻"}
-		])
+		GameManager.start_floor_battle(FloorData.get_floor_enemies(1))
 	
 	InputManager.button_2_left_pressed.connect(_on_heads)
 	InputManager.button_2_right_pressed.connect(_on_tails)
@@ -53,14 +49,16 @@ func _update_all():
 func _update_enemy():
 	if GameManager.current_enemy.is_empty():
 		return
-	enemy_name.text = GameManager.current_enemy.name.to_upper()
-	enemy_portrait.text = GameManager.current_enemy.get("portrait_emoji", "😈")
-	var hp = GameManager.current_enemy.get("hp", 0)
-	var max_hp = GameManager.current_enemy.get("max_hp", hp)
+	var e = GameManager.current_enemy
+	enemy_name.text = String(e.get("name", "?")).to_upper()
+	enemy_portrait.text = e.get("portrait_emoji", "😈")
+	SpriteManager.apply(enemy_portrait_sprite, String(e.get("portrait", "")), enemy_portrait)
+	var hp = e.get("hp", 0)
+	var max_hp = e.get("max_hp", hp)
 	enemy_hp_bar.max_value = max_hp
 	enemy_hp_bar.value = hp
 	enemy_hp_value.text = "%d/%d" % [hp, max_hp]
-	next_attack_value.text = str(GameManager.current_enemy.get("next_attack", 0))
+	next_attack_value.text = str(e.get("next_attack", 0))
 
 
 func _set_coin(face_text: String):

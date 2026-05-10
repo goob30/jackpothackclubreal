@@ -105,6 +105,17 @@ text = "😈"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite" type="TextureRect" parent="EnemyHalf/EnemyPortrait"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 5
+visible = false
+mouse_filter = 2
+
 [node name="EnemyName" type="Label" parent="EnemyHalf" unique_id=2065943829]
 layout_mode = 1
 anchors_preset = 8

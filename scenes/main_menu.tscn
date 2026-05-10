@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://wqf5ynve46xr"]
 
 [ext_resource type="Script" uid="uid://lge367w2ef7f" path="res://scenes/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="PackedScene" uid="uid://bvy5rcxjxv8e3" path="res://scenes/settings.tscn" id="2_ekxnf"]
-[ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="3_bg"]
+[ext_resource type="PackedScene" uid="uid://bhj2ulfbbk2ao" path="res://scenes/settings.tscn" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://bkyyosmh68i83" path="res://assets/sprites/background/title.png" id="2_wu84c"]
 [ext_resource type="FontFile" uid="uid://dta8jydrvycls" path="res://Cinzel-Bold.otf" id="3_wu84c"]
 
 [node name="MainMenu" type="Control" unique_id=480168796]
@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_bg")
+texture = ExtResource("2_wu84c")
 expand_mode = 1
 stretch_mode = 6
 
