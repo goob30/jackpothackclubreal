@@ -63,7 +63,21 @@ func update_queue():
 		var lbl = Label.new()
 		lbl.text = enemy.get("portrait_emoji", "👻")
 		lbl.add_theme_font_size_override("font_size", 22)
+		lbl.custom_minimum_size = Vector2(40, 40)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		queue_container.add_child(lbl)
+
+		var sprite = TextureRect.new()
+		sprite.name = "Sprite"
+		sprite.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		sprite.visible = false
+		sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		sprite.texture_filter = TEXTURE_FILTER_NEAREST
+		lbl.add_child(sprite)
+		SpriteManager.apply(sprite, String(enemy.get("icon", "")), lbl)
 
 
 func update_player_hp(new_hp: int, max_hp: int):

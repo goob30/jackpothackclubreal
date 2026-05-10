@@ -7,6 +7,7 @@ extends Control
 @onready var enemy_hp_bar: TextureProgressBar = $EnemyHalf/EnemyHPContainer/EnemyHPBar
 @onready var enemy_hp_value: Label = $EnemyHalf/EnemyHPContainer/HPValue
 @onready var next_attack_value: Label = $EnemyHalf/NextAttackBox/NextAttackValue
+@onready var queue_icons: HBoxContainer = $EnemyHalf/QueueIcons
 @onready var coin: Label = $PlayerHalf/GamemodeArea/Coin
 @onready var coin_sprite: TextureRect = $PlayerHalf/GamemodeArea/Coin/Sprite
 @onready var background: TextureRect = $Background
@@ -43,7 +44,32 @@ func _ready():
 
 func _update_all():
 	_update_enemy()
+	_update_queue()
 	_update_player_hp(GameManager.player_hp, GameManager.player_max_hp)
+
+
+func _update_queue():
+	for child in queue_icons.get_children():
+		child.queue_free()
+	for enemy in GameManager.enemies_remaining:
+		var lbl = Label.new()
+		lbl.text = enemy.get("portrait_emoji", "👻")
+		lbl.add_theme_font_size_override("font_size", 24)
+		lbl.custom_minimum_size = Vector2(40, 40)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		queue_icons.add_child(lbl)
+
+		var sprite = TextureRect.new()
+		sprite.name = "Sprite"
+		sprite.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		sprite.visible = false
+		sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		sprite.texture_filter = TEXTURE_FILTER_NEAREST
+		lbl.add_child(sprite)
+		SpriteManager.apply(sprite, String(enemy.get("icon", "")), lbl)
 
 
 func _update_enemy():
@@ -133,6 +159,7 @@ func _on_flip():
 
 func _on_new_enemy(_enemy):
 	_update_enemy()
+	_update_queue()
 
 
 func _on_floor_cleared():
