@@ -24,5 +24,4 @@ func _on_baby_pressed():
 
 
 func _on_button_pressed() -> void:
-	Global.last_scene_name = "res://scenes/main_menu.tscn"
-	get_tree().change_scene_to_file("res://scenes/settings.tscn")
+	$settingsControl.visible = true

@@ -28,7 +28,7 @@ func _on_scan_serial_button_pressed() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	$Control.visible = false
+	self.visible = false
 
 
 func _on_music_volume_slider_drag_ended(value_changed: bool) -> void:

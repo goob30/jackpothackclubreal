@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://lge367w2ef7f" path="res://scenes/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="PackedScene" uid="uid://bvy5rcxjxv8e3" path="res://scenes/settings.tscn" id="2_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="3_bg"]
+[ext_resource type="FontFile" uid="uid://dta8jydrvycls" path="res://Cinzel-Bold.otf" id="3_wu84c"]
 
 [node name="MainMenu" type="Control" unique_id=480168796]
 layout_mode = 3
@@ -14,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
 [node name="ColorRect" type="TextureRect" parent="." unique_id=571816383]
+modulate = Color(0.6, 0.4, 0.45, 1)
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -24,7 +26,6 @@ grow_vertical = 2
 texture = ExtResource("3_bg")
 expand_mode = 1
 stretch_mode = 6
-modulate = Color(0.6, 0.4, 0.45, 1)
 
 [node name="Vignette" type="ColorRect" parent="." unique_id=571816384]
 layout_mode = 1
@@ -51,6 +52,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.9019608, 0.08627451, 0.2901961, 1)
 theme_override_colors/font_outline_color = Color(0.83137256, 0.64705884, 0.25882354, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_wu84c")
 theme_override_font_sizes/font_size = 100
 text = "Deal with the Devil"
 
@@ -64,7 +66,7 @@ anchor_bottom = 0.5
 offset_left = -200.0
 offset_top = -24.0
 offset_right = 200.0
-offset_bottom = 176.0
+offset_bottom = 172.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 25
@@ -98,12 +100,17 @@ horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=187643144]
 layout_mode = 0
-offset_right = 176.0
+offset_right = 104.0
 offset_bottom = 72.0
-text = "im setting it ouughgh"
+text = "Settomgs"
 
-[node name="Control" parent="." unique_id=1625509189 instance=ExtResource("2_ekxnf")]
+[node name="settingsControl" parent="." unique_id=1625509189 instance=ExtResource("2_ekxnf")]
 visible = false
-layout_mode = 1
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -24,6 +24,7 @@ AudioController="*res://autoload/AudioController.gd"
 SpriteManager="*res://autoload/SpriteManager.gd"
 SettingsGlobal="*uid://w3hpirmn3la4"
 Global="*uid://djrnywp0u5g3s"
+DiceInputFoenem="*uid://b1jubsokh1o7u"
 
 [editor_plugins]
 

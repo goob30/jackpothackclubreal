@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxkppxov8wvnk"]
+[gd_scene format=3 uid="uid://cxkppxov8wvnk"]
 
 [ext_resource type="Script" path="res://scenes/workshop.gd" id="1_wks"]
 [ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="2_bg"]
