@@ -2,7 +2,7 @@ extends Node
 # to get if its rolling, use DiceInputFoenem.rolling
 # to get the result, use
 # if !DiceInputFoenem.Rolling, DiceInputFoenem.current_face
-# && current_face != -1
+# && current_face != -13
 
 signal roll_started
 signal face_settled(face: int)
@@ -111,8 +111,8 @@ func parse_serial(line: String):
 				face_settled.emit(current_face)
 		return
 	if line.begins_with("bt"):
-		
 		if line.substr(2).is_valid_int(): bt_val = line.substr(2)
+		return
 	
 	print("Unknown serial message: ", line)
 
