@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://csaufwk0umvnk"]
+
+[ext_resource type="Script" path="res://scenes/reward.gd" id="1_rwd"]
+[ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="2_bg"]
+
+[node name="Reward" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rwd")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(0.6, 0.5, 0.4, 1)
+
+[node name="Vignette" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039, 0.012, 0.024, 0.55)
+
+[node name="Headline" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 100.0
+offset_right = 400.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
+theme_override_font_sizes/font_size = 80
+text = "FLOOR CLEARED"
+horizontal_alignment = 1
+
+[node name="FloorLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 210.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.902, 0.086, 0.286, 1)
+theme_override_font_sizes/font_size = 28
+text = "THE PIT"
+horizontal_alignment = 1
+
+[node name="RewardsBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="GoldLine" type="Label" parent="RewardsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
+theme_override_font_sizes/font_size = 32
+text = "+0 Gold"
+horizontal_alignment = 1
+
+[node name="TokenLine" type="Label" parent="RewardsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.18, 0.533, 1)
+theme_override_font_sizes/font_size = 28
+text = "+0 Tokens"
+horizontal_alignment = 1
+
+[node name="HealLine" type="Label" parent="RewardsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.941, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "+0 HP"
+horizontal_alignment = 1
+
+[node name="Medal" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 30.0
+offset_right = 80.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "✦"
+horizontal_alignment = 1
+
+[node name="Sprite" type="TextureRect" parent="Medal"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 5
+visible = false
+mouse_filter = 2
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -130.0
+offset_right = 150.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "CONTINUE"
+
+[node name="SkipHint" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -50.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
+theme_override_font_sizes/font_size = 14
+text = "[SPACE] continue   ·   auto in 3s"
+horizontal_alignment = 1
