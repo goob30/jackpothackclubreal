@@ -35,6 +35,7 @@ func _ready():
 	GameManager.floor_cleared.connect(_on_floor_cleared)
 	GameManager.player_died_normal.connect(_on_player_died)
 	GameManager.player_died_baby.connect(_on_player_died_baby)
+	GameManager.inter_enemy_heal.connect(_on_inter_enemy_heal)
 
 	SpriteManager.apply_or_keep(background, SpriteManager.bg_for_district(GameManager.get_district(), GameManager.is_final_floor()))
 	_set_coin("?")
@@ -181,3 +182,12 @@ func _on_player_died_baby():
 	button_hints.text = "BABY DEATH — RETREATING"
 	await get_tree().create_timer(1.2).timeout
 	SceneManager.go_to_elevator()
+
+
+func _on_inter_enemy_heal(amount: int):
+	AudioController.play_sfx(AudioController.SFX_HEAL)
+	var prev_hint = button_hints.text
+	button_hints.text = "+%d HP — REGEN" % amount
+	await get_tree().create_timer(0.9).timeout
+	if button_hints.text.begins_with("+"):
+		button_hints.text = prev_hint

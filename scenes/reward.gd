@@ -29,14 +29,12 @@ func _ready():
 
 	var gold_reward = 8 + f * 2
 	var token_reward = 0
-	var heal_amount = 3
 
 	SpriteManager.apply_or_keep(background, SpriteManager.BG_REWARD)
 
 	if was_boss:
 		gold_reward += 12
 		token_reward = 1
-		heal_amount = 8
 		medal.text = "👑"
 		SpriteManager.apply(medal_sprite, SpriteManager.UI_MEDAL_BOSS, medal)
 	else:
@@ -51,13 +49,13 @@ func _ready():
 	GameManager.add_gold(gold_reward)
 	if token_reward > 0:
 		GameManager.add_tokens(token_reward)
-	GameManager.heal(heal_amount)
 
 	headline.text = "FLOOR %d CLEARED" % f
 	floor_label.text = GameManager.get_district_display_name().to_upper()
 	gold_line.text = "+0 Gold"
 	token_line.text = "+%d Token" % token_reward if token_reward > 0 else "—"
-	heal_line.text = "+%d HP" % heal_amount
+	heal_line.text = "♥ FULL HEAL ♥"
+	heal_line.add_theme_color_override("font_color", Color("#4cae6a"))
 
 	GameManager.advance_floor()
 

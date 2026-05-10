@@ -41,6 +41,8 @@ signal charm_lost(charm: Dictionary)
 signal slot_changed(slot_index: int, charm: Dictionary)
 signal pending_charm_set(charm: Dictionary)
 signal pending_charm_cleared
+signal inter_enemy_heal(amount: int)
+signal floor_full_heal(amount: int)
 signal player_died_normal
 signal player_died_baby
 signal game_won
@@ -355,6 +357,7 @@ func start_floor_battle(enemies: Array):
 func _advance_to_next_enemy():
 	if enemies_remaining.is_empty():
 		current_enemy = {}
+		_apply_floor_full_heal()
 		floor_cleared.emit()
 		return
 	current_enemy = enemies_remaining.pop_front()
@@ -365,7 +368,30 @@ func current_enemy_defeated():
 	if current_enemy.is_empty():
 		return
 	enemy_defeated.emit(current_enemy)
+	# Heal between enemies. The lower the HP, the bigger the regen.
+	if not enemies_remaining.is_empty():
+		_apply_inter_enemy_heal()
 	_advance_to_next_enemy()
+
+
+func _apply_inter_enemy_heal():
+	var missing = player_max_hp - player_hp
+	if missing <= 0:
+		return
+	# Quadratic curve: heal = ceil(missing^2 / max_hp), clamped to at least 1.
+	# So 1 HP left of 20 heals ~19; 15/20 heals ~2.
+	var amount = int(ceil(float(missing * missing) / float(player_max_hp)))
+	amount = max(1, amount)
+	heal(amount)
+	inter_enemy_heal.emit(amount)
+
+
+func _apply_floor_full_heal():
+	var missing = player_max_hp - player_hp
+	if missing <= 0:
+		return
+	heal(missing)
+	floor_full_heal.emit(missing)
 
 
 func current_enemy_take_damage(amount: int):

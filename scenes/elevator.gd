@@ -147,24 +147,27 @@ func _make_cell(entry: Dictionary) -> Panel:
 	var lbl = Label.new()
 	lbl.name = "Label"
 	lbl.text = String(entry.label)
-	lbl.add_theme_font_size_override("font_size", 26)
+	lbl.add_theme_font_size_override("font_size", 24)
 	lbl.add_theme_color_override("font_color", Color("#f0e6d2"))
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	lbl.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	lbl.offset_bottom = -14
+	lbl.offset_bottom = -18
 	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lbl.clip_contents = false
 	cell.add_child(lbl)
 
 	var caption = Label.new()
 	caption.name = "Caption"
-	caption.add_theme_font_size_override("font_size", 9)
+	caption.add_theme_font_size_override("font_size", 10)
 	caption.add_theme_color_override("font_color", Color("#b8a98e"))
 	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	caption.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	caption.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	caption.offset_top = -14
-	caption.offset_bottom = -3
+	caption.offset_top = -18
+	caption.offset_bottom = -2
 	caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	caption.clip_contents = false
 	cell.add_child(caption)
 
 	cell.add_theme_stylebox_override("panel", _make_box(entry, false))

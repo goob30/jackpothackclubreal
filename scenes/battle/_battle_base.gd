@@ -17,6 +17,8 @@ func _ready():
 		GameManager.floor_cleared.connect(_on_floor_cleared)
 	if not GameManager.new_enemy_appeared.is_connected(_on_new_enemy):
 		GameManager.new_enemy_appeared.connect(_on_new_enemy)
+	if not GameManager.inter_enemy_heal.is_connected(_on_inter_enemy_heal):
+		GameManager.inter_enemy_heal.connect(_on_inter_enemy_heal)
 
 	AudioController.play_district_music()
 	hud.update_all()
@@ -45,6 +47,12 @@ func _on_floor_cleared():
 
 func _on_new_enemy(_enemy):
 	hud.update_all()
+
+
+func _on_inter_enemy_heal(amount: int):
+	if hud:
+		hud.spawn_damage_number(-amount, hud.get_player_center(), Color("#4cae6a"))
+	AudioController.play_sfx(AudioController.SFX_HEAL)
 
 
 func apply_damage_to_enemy(amount: int):
