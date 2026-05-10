@@ -210,19 +210,6 @@ offset_bottom = 240.0
 grow_horizontal = 2
 color = Color(0, 0.941, 1, 0.15)
 
-[node name="GlassOverlay" type="TextureRect" parent="Machine/GlassWindow" unique_id=1329689511]
-visible = false
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 6
-
 [node name="GlassEmojis" type="Label" parent="Machine/GlassWindow" unique_id=1235140392]
 layout_mode = 1
 anchors_preset = 15
@@ -236,22 +223,6 @@ text = "⚪🟢🔵🟣
 🔵🟣⚪🟢"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Tray" type="TextureRect" parent="Machine" unique_id=918624525]
-visible = false
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -100.0
-offset_top = 244.0
-offset_right = 100.0
-offset_bottom = 304.0
-grow_horizontal = 2
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 6
 
 [node name="Lever" type="Label" parent="Machine" unique_id=1066557160]
 layout_mode = 1

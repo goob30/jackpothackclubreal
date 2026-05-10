@@ -1,7 +1,20 @@
 [gd_scene format=3 uid="uid://cxkppxov8wvnk"]
 
-[ext_resource type="Script" path="res://scenes/workshop.gd" id="1_wks"]
+[ext_resource type="Script" uid="uid://ib8sl5hvdgm8" path="res://scenes/workshop.gd" id="1_wks"]
 [ext_resource type="Texture2D" uid="uid://cn4op8j8sh8sv" path="res://assets/background.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://dcpd22w0ujl8t" path="res://assets/sprites/ui/player_card.png" id="3_g1tdj"]
+
+[sub_resource type="StyleBoxFlat" id="pending_box"]
+bg_color = Color(0.149, 0.04, 0.094, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.18, 0.533, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="card_box"]
 bg_color = Color(0.122, 0.063, 0.094, 0.96)
@@ -29,19 +42,7 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="pending_box"]
-bg_color = Color(0.149, 0.04, 0.094, 0.94)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.18, 0.533, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[node name="Workshop" type="Control"]
+[node name="Workshop" type="Control" unique_id=378655254]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +51,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wks")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=497157901]
+modulate = Color(0.4, 0.28, 0.4, 1)
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -61,9 +63,8 @@ grow_vertical = 2
 texture = ExtResource("2_bg")
 expand_mode = 1
 stretch_mode = 6
-modulate = Color(0.4, 0.28, 0.4, 1)
 
-[node name="Vignette" type="ColorRect" parent="."]
+[node name="Vignette" type="ColorRect" parent="." unique_id=363122126]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.039, 0.012, 0.024, 0.55)
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1932200869]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -87,7 +88,7 @@ theme_override_font_sizes/font_size = 48
 text = "PLAYER CARD"
 horizontal_alignment = 1
 
-[node name="PendingBanner" type="Panel" parent="."]
+[node name="PendingBanner" type="Panel" parent="." unique_id=1428718040]
 visible = false
 layout_mode = 1
 anchors_preset = 5
@@ -100,7 +101,7 @@ offset_bottom = 200.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("pending_box")
 
-[node name="HeaderLabel" type="Label" parent="PendingBanner"]
+[node name="HeaderLabel" type="Label" parent="PendingBanner" unique_id=103163815]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -115,30 +116,35 @@ theme_override_font_sizes/font_size = 14
 text = "★ INCOMING STICKER ★"
 horizontal_alignment = 1
 
-[node name="Icon" type="Label" parent="PendingBanner"]
+[node name="Icon" type="Label" parent="PendingBanner" unique_id=1570994470]
 layout_mode = 1
 anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
 offset_left = 30.0
 offset_top = -36.0
 offset_right = 100.0
 offset_bottom = 36.0
+grow_vertical = 2
 theme_override_font_sizes/font_size = 48
 text = "✦"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite" type="TextureRect" parent="PendingBanner/Icon"]
+[node name="Sprite" type="TextureRect" parent="PendingBanner/Icon" unique_id=2131013353]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-visible = false
-mouse_filter = 2
 
-[node name="CharmName" type="Label" parent="PendingBanner"]
+[node name="CharmName" type="Label" parent="PendingBanner" unique_id=1633064827]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -155,7 +161,7 @@ theme_override_font_sizes/font_size = 22
 text = "—"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="PendingBanner"]
+[node name="Description" type="Label" parent="PendingBanner" unique_id=1898703169]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,11 +176,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
 theme_override_font_sizes/font_size = 16
-text = ""
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="PlayerCard" type="Panel" parent="."]
+[node name="PlayerCard" type="Panel" parent="." unique_id=1783420424]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -189,7 +194,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("card_box")
 
-[node name="CardBg" type="TextureRect" parent="PlayerCard"]
+[node name="CardBg" type="TextureRect" parent="PlayerCard" unique_id=1179747700]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -197,25 +202,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_g1tdj")
 expand_mode = 1
 stretch_mode = 6
-visible = false
-mouse_filter = 2
 
-[node name="CardFrame" type="TextureRect" parent="PlayerCard"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-stretch_mode = 6
+[node name="CardTitle" type="Label" parent="PlayerCard" unique_id=1006262961]
 visible = false
-mouse_filter = 2
-
-[node name="CardTitle" type="Label" parent="PlayerCard"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -230,7 +223,7 @@ theme_override_font_sizes/font_size = 28
 text = "PLAYER ID"
 horizontal_alignment = 1
 
-[node name="Avatar" type="Label" parent="PlayerCard"]
+[node name="Avatar" type="Label" parent="PlayerCard" unique_id=267826725]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -245,33 +238,36 @@ text = "👤"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite" type="TextureRect" parent="PlayerCard/Avatar"]
+[node name="Sprite" type="TextureRect" parent="PlayerCard/Avatar" unique_id=2042273340]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-visible = false
-mouse_filter = 2
 
-[node name="StatsLine" type="Label" parent="PlayerCard"]
+[node name="StatsLine" type="Label" parent="PlayerCard" unique_id=1763341091]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -360.0
-offset_top = 168.0
-offset_right = 360.0
-offset_bottom = 198.0
+offset_left = -349.0
+offset_top = 190.0
+offset_right = 371.0
+offset_bottom = 220.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0.941, 1, 1)
 theme_override_font_sizes/font_size = 16
 text = "HP 20/20   ·   Floor 1   ·   Run #1"
 horizontal_alignment = 1
 
-[node name="SlotsHeader" type="Label" parent="PlayerCard"]
+[node name="SlotsHeader" type="Label" parent="PlayerCard" unique_id=463896096]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -286,7 +282,7 @@ theme_override_font_sizes/font_size = 14
 text = "── STICKER SLOTS ──"
 horizontal_alignment = 1
 
-[node name="SlotsRow" type="HBoxContainer" parent="PlayerCard"]
+[node name="SlotsRow" type="HBoxContainer" parent="PlayerCard" unique_id=121281191]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -299,7 +295,7 @@ grow_horizontal = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="DiscardSlot" type="Panel" parent="."]
+[node name="DiscardSlot" type="Panel" parent="." unique_id=1822472445]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -314,7 +310,7 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="DiscardSlot"]
+[node name="Label" type="Label" parent="DiscardSlot" unique_id=1621141334]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,21 +325,20 @@ STICKER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DetailPanel" type="Panel" parent="."]
+[node name="DetailPanel" type="Panel" parent="." unique_id=12880357]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 offset_left = -540.0
 offset_top = 220.0
 offset_right = -60.0
 offset_bottom = 800.0
 grow_horizontal = 0
+grow_vertical = 0
 theme_override_styles/panel = SubResource("detail_box")
 
-[node name="Rarity" type="Label" parent="DetailPanel"]
+[node name="Rarity" type="Label" parent="DetailPanel" unique_id=349483397]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -357,7 +352,7 @@ theme_override_font_sizes/font_size = 16
 text = "EMPTY SLOT"
 horizontal_alignment = 1
 
-[node name="Icon" type="Label" parent="DetailPanel"]
+[node name="Icon" type="Label" parent="DetailPanel" unique_id=1577792839]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -372,18 +367,20 @@ text = "—"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite" type="TextureRect" parent="DetailPanel/Icon"]
+[node name="Sprite" type="TextureRect" parent="DetailPanel/Icon" unique_id=33565547]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
-visible = false
-mouse_filter = 2
 
-[node name="CharmName" type="Label" parent="DetailPanel"]
+[node name="CharmName" type="Label" parent="DetailPanel" unique_id=138183076]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -397,7 +394,7 @@ theme_override_font_sizes/font_size = 28
 text = "—"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="DetailPanel"]
+[node name="Description" type="Label" parent="DetailPanel" unique_id=1554373758]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -409,11 +406,10 @@ offset_bottom = 350.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
 theme_override_font_sizes/font_size = 16
-text = ""
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Stats" type="VBoxContainer" parent="DetailPanel"]
+[node name="Stats" type="VBoxContainer" parent="DetailPanel" unique_id=803837443]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -425,41 +421,41 @@ offset_bottom = 430.0
 grow_horizontal = 2
 theme_override_constants/separation = 4
 
-[node name="TriggerRow" type="HBoxContainer" parent="DetailPanel/Stats"]
+[node name="TriggerRow" type="HBoxContainer" parent="DetailPanel/Stats" unique_id=1638282929]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TriggerLabel" type="Label" parent="DetailPanel/Stats/TriggerRow"]
+[node name="TriggerLabel" type="Label" parent="DetailPanel/Stats/TriggerRow" unique_id=1969756614]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
 theme_override_font_sizes/font_size = 13
 text = "TRIGGER"
 
-[node name="TriggerValue" type="Label" parent="DetailPanel/Stats/TriggerRow"]
+[node name="TriggerValue" type="Label" parent="DetailPanel/Stats/TriggerRow" unique_id=897130764]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
 theme_override_font_sizes/font_size = 13
 text = "—"
 
-[node name="AppliesRow" type="HBoxContainer" parent="DetailPanel/Stats"]
+[node name="AppliesRow" type="HBoxContainer" parent="DetailPanel/Stats" unique_id=121397343]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="AppliesLabel" type="Label" parent="DetailPanel/Stats/AppliesRow"]
+[node name="AppliesLabel" type="Label" parent="DetailPanel/Stats/AppliesRow" unique_id=606231966]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
 theme_override_font_sizes/font_size = 13
 text = "APPLIES TO"
 
-[node name="AppliesValue" type="Label" parent="DetailPanel/Stats/AppliesRow"]
+[node name="AppliesValue" type="Label" parent="DetailPanel/Stats/AppliesRow" unique_id=322664367]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.831, 0.647, 0.259, 1)
 theme_override_font_sizes/font_size = 13
 text = "—"
 
-[node name="Flavor" type="Label" parent="DetailPanel"]
+[node name="Flavor" type="Label" parent="DetailPanel" unique_id=700828227]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -471,11 +467,10 @@ offset_bottom = 510.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.722, 0.663, 0.557, 1)
 theme_override_font_sizes/font_size = 13
-text = ""
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="ActionHint" type="Label" parent="DetailPanel"]
+[node name="ActionHint" type="Label" parent="DetailPanel" unique_id=747283005]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -489,10 +484,9 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 16
-text = ""
 horizontal_alignment = 1
 
-[node name="DialogLabel" type="Label" parent="."]
+[node name="DialogLabel" type="Label" parent="." unique_id=1252619411]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -507,10 +501,9 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.941, 0.902, 0.824, 1)
 theme_override_font_sizes/font_size = 18
-text = ""
 horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=406423977]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -523,7 +516,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 22
 text = "← Elevator"
 
-[node name="HelpHint" type="Label" parent="."]
+[node name="HelpHint" type="Label" parent="." unique_id=1929490660]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

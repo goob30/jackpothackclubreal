@@ -66,7 +66,7 @@ const UI_CROWN: String            = "res://assets/sprites/ui/crown.png"
 const UI_DEVIL_SILHOUETTE: String = "res://assets/sprites/ui/devil_silhouette.png"
 
 # Player Card (Workshop)
-const UI_PLAYER_CARD_BG: String    = "res://assets/sprites/ui/player_card_bg.png"
+const UI_PLAYER_CARD_BG: String    = "res://assets/sprites/ui/player_card.png"
 const UI_PLAYER_CARD_FRAME: String = "res://assets/sprites/ui/player_card_frame.png"
 const UI_PLAYER_AVATAR: String     = "res://assets/sprites/ui/player_avatar.png"
 const UI_STICKER_SLOT: String      = "res://assets/sprites/ui/sticker_slot.png"
@@ -180,15 +180,29 @@ func load_or_null(path: String) -> Texture2D:
 # Apply a sprite if it exists; otherwise fall back to a Label/Control.
 # - rect: the TextureRect that gets the sprite
 # - fallback: optional CanvasItem (usually a Label) whose text is masked when the sprite loads
+#
+# Behaviour:
+#   1. If the path resolves -> load it onto the rect and hide the fallback.
+#   2. If the path doesn't resolve BUT the rect already has a texture
+#      (e.g. assigned in the editor) -> respect that texture, show it, hide fallback.
+#   3. Pass path == "" to explicitly clear the rect and show the fallback.
+#
 # Uses self_modulate so the fallback can be the parent of the sprite without
 # hiding the sprite (visibility/alpha cascade vs. self_modulate).
-# Returns true when the sprite was applied.
+# Returns true when a texture is visible on the rect after the call.
 func apply(rect: TextureRect, path: String, fallback: CanvasItem = null) -> bool:
 	if rect == null:
 		return false
 	var tex = load_or_null(path)
 	if tex:
 		rect.texture = tex
+		rect.visible = true
+		if fallback:
+			fallback.self_modulate = Color(1, 1, 1, 0)
+		return true
+	# Path didn't resolve. If the rect already has a texture (set in the editor),
+	# don't clobber it — keep it visible.
+	if path != "" and rect.texture != null:
 		rect.visible = true
 		if fallback:
 			fallback.self_modulate = Color(1, 1, 1, 0)

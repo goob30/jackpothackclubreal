@@ -1,6 +1,6 @@
 extends Control
 
-var serial: GdSerial
+var serial: Object = null
 var read_timer := 0.0
 const READ_INTERVAL = 1.0 / 30.0  # 30Hz
 
@@ -10,7 +10,10 @@ var face_count := 0
 var temp_face := 0
 
 func _ready():
-	serial = GdSerial.new()
+	if not ClassDB.class_exists("GdSerial"):
+		print("GdSerial unavailable (Web build)")
+		return
+	serial = ClassDB.instantiate("GdSerial")
 	print(serial.list_ports())
 	serial.set_port("COM5")
 	serial.set_baud_rate(115200)
@@ -24,7 +27,7 @@ func _process(delta):
 	read_timer += delta
 	if read_timer >= READ_INTERVAL:
 		read_timer = 0.0
-		if serial and serial.is_open():
+		if serial != null and serial.is_open():
 			while serial.bytes_available() > 0:
 				var line = serial.readline().strip_edges()
 				if line != "":
@@ -61,9 +64,9 @@ func parse_serial(line: String):
 	print("Unknown serial message: ", line)
 
 func _on_button_pressed() -> void:
-	if serial and serial.is_open():
+	if serial != null and serial.is_open():
 		serial.writeline("led")
 
 func _exit_tree():
-	if serial and serial.is_open():
+	if serial != null and serial.is_open():
 		serial.close()

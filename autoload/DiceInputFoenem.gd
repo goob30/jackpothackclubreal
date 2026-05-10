@@ -7,7 +7,7 @@ extends Node
 signal roll_started
 signal face_settled(face: int)
 
-var serial: GdSerial
+var serial: Object = null  # GdSerial when the extension is present; null on Web.
 
 var read_timer := 0.0
 const READ_INTERVAL := 1.0 / 30.0
@@ -22,7 +22,13 @@ var bt_val
 
 
 func _ready():
-	serial = GdSerial.new()
+	if not ClassDB.class_exists("GdSerial"):
+		print("[DiceInputFoenem] GdSerial extension not available (likely a Web build) — physical dice disabled, keyboard fallback only.")
+		return
+	serial = ClassDB.instantiate("GdSerial")
+	if serial == null:
+		print("[DiceInputFoenem] Failed to instantiate GdSerial — physical dice disabled.")
+		return
 	print(serial.list_ports())
 	port_name = _resolve_port()
 	if port_name == "":
@@ -32,7 +38,7 @@ func _ready():
 
 
 func _resolve_port() -> String:
-	# Prefer the user-configured port (from the Settings screen).
+	# 1) Prefer the user-configured port (from the Settings screen).
 	var configured: String = ""
 	if Engine.has_singleton("SettingsGlobal") or has_node("/root/SettingsGlobal"):
 		var sg = get_node_or_null("/root/SettingsGlobal")
@@ -40,11 +46,41 @@ func _resolve_port() -> String:
 			configured = String(sg.settings.get("use_port", "")).strip_edges()
 	if configured != "":
 		return configured
-	# Last-resort default — Windows COM5 like the original code.
+	# 2) Auto-detect a USB-serial device (CP210x / CH340 / FTDI / Arduino).
+	var auto = _autodetect_port()
+	if auto != "":
+		return auto
+	# 3) Last-resort default — Windows COM5 like the original code.
 	return "COM5"
 
 
+func _autodetect_port() -> String:
+	if serial == null or not serial.has_method("list_ports"):
+		return ""
+	var ports = serial.list_ports()
+	if ports == null:
+		return ""
+	# Linux/Mac: USB-serial typically shows up as /dev/ttyUSB* or /dev/ttyACM*.
+	# /dev/ttyS* (built-in serial) is intentionally skipped.
+	for key in ports.keys():
+		var info = ports[key]
+		var pname = String(info.get("port_name", ""))
+		if pname.begins_with("/dev/ttyUSB") or pname.begins_with("/dev/ttyACM"):
+			return pname
+	# Windows fallback: prefer COM3+ (COM1/COM2 are usually built-in / mouse).
+	for key in ports.keys():
+		var info = ports[key]
+		var pname = String(info.get("port_name", ""))
+		if pname.begins_with("COM"):
+			var ns = pname.substr(3)
+			if ns.is_valid_int() and ns.to_int() >= 3:
+				return pname
+	return ""
+
+
 func _open_port(p: String):
+	if serial == null:
+		return
 	serial.set_port(p)
 	serial.set_baud_rate(115200)
 	if serial.open():
@@ -57,7 +93,9 @@ func _open_port(p: String):
 
 
 func reconnect(new_port: String = ""):
-	if serial and serial.is_open():
+	if serial == null:
+		return
+	if serial.is_open():
 		serial.close()
 		connected = false
 	var target = new_port if new_port != "" else _resolve_port()
@@ -67,6 +105,8 @@ func reconnect(new_port: String = ""):
 
 
 func _process(delta):
+	if serial == null:
+		return
 	read_timer += delta
 	if read_timer >= READ_INTERVAL:
 		read_timer = 0.0
@@ -74,9 +114,9 @@ func _process(delta):
 
 
 func read_serial():
-	if !serial:
+	if serial == null:
 		return
-	if !serial.is_open():
+	if not serial.is_open():
 		return
 	while serial.bytes_available() > 0:
 		var line = serial.readline().strip_edges()
@@ -117,5 +157,5 @@ func parse_serial(line: String):
 
 
 func _exit_tree():
-	if serial and serial.is_open():
+	if serial != null and serial.is_open():
 		serial.close() #haha theres 67 lines of code im so mature

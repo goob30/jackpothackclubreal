@@ -11,10 +11,11 @@ extends Control
 
 @onready var card_panel: Panel = $PlayerCard
 @onready var card_bg: TextureRect = $PlayerCard/CardBg
-@onready var card_frame: TextureRect = $PlayerCard/CardFrame
+@onready var card_title: Label = $PlayerCard/CardTitle
 @onready var card_avatar: Label = $PlayerCard/Avatar
 @onready var card_avatar_sprite: TextureRect = $PlayerCard/Avatar/Sprite
 @onready var card_stats: Label = $PlayerCard/StatsLine
+@onready var slots_header: Label = $PlayerCard/SlotsHeader
 @onready var slots_row: HBoxContainer = $PlayerCard/SlotsRow
 
 @onready var discard_card: Panel = $DiscardSlot
@@ -44,8 +45,13 @@ var _peel_armed: int = -1     # cursor index armed for destructive peel; -1 = no
 
 func _ready():
 	SpriteManager.apply_or_keep(background, SpriteManager.BG_CHARM_CO)
-	SpriteManager.apply(card_bg, SpriteManager.UI_PLAYER_CARD_BG, null)
-	SpriteManager.apply(card_frame, SpriteManager.UI_PLAYER_CARD_FRAME, null)
+	# One-sprite player card: when the card art loads, hide the styled
+	# placeholder panel + title + slot divider so they don't show through.
+	var has_card_bg = SpriteManager.apply(card_bg, SpriteManager.UI_PLAYER_CARD_BG, null)
+	if has_card_bg:
+		card_panel.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+		card_title.visible = false
+		slots_header.visible = false
 	SpriteManager.apply(card_avatar_sprite, SpriteManager.UI_PLAYER_AVATAR, card_avatar)
 
 	back_button.pressed.connect(_back)

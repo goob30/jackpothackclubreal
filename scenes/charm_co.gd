@@ -3,9 +3,11 @@ extends Control
 
 @onready var brass_button: Button = $Machine/BrassButton
 @onready var soul_button: Button = $Machine/SoulButton
+@onready var machine_panel: Panel = $Machine
 @onready var machine_body_sprite: TextureRect = $Machine/MachineBody
-@onready var glass_overlay_sprite: TextureRect = $Machine/GlassWindow/GlassOverlay
-@onready var tray_sprite: TextureRect = $Machine/Tray
+@onready var machine_title: Label = $Machine/MachineTitle
+@onready var glass_window: ColorRect = $Machine/GlassWindow
+@onready var glass_emojis: Label = $Machine/GlassWindow/GlassEmojis
 @onready var lever: Label = $Machine/Lever
 @onready var lever_sprite: TextureRect = $Machine/Lever/Sprite
 @onready var rolling_capsule: Label = $Machine/RollingCapsule
@@ -57,9 +59,14 @@ func _ready():
 	SpriteManager.apply_or_keep(background, SpriteManager.BG_CHARM_CO)
 	SpriteManager.apply(vendor_sprite, SpriteManager.VENDOR_DEFAULT, vendor_label)
 	SpriteManager.apply(lever_sprite, SpriteManager.MACHINE_LEVER, lever)
-	SpriteManager.apply(machine_body_sprite, SpriteManager.MACHINE_BODY, null)
-	SpriteManager.apply(glass_overlay_sprite, SpriteManager.MACHINE_GLASS, null)
-	SpriteManager.apply(tray_sprite, SpriteManager.MACHINE_TRAY, null)
+	# One-sprite machine: when the body art loads, hide the placeholder
+	# styled panel + glass window so they don't double up under the art.
+	var has_body = SpriteManager.apply(machine_body_sprite, SpriteManager.MACHINE_BODY, null)
+	if has_body:
+		machine_panel.add_theme_stylebox_override("panel", StyleBoxEmpty.new())
+		glass_window.visible = false
+		glass_emojis.visible = false
+		machine_title.visible = false
 
 	_show_greeting()
 	_update_buttons()
